@@ -1,5 +1,6 @@
 package eu.hypetime.proxy;
 
+import eu.hypetime.proxy.bots.dc.DiscordBot;
 import net.md_5.bungee.api.plugin.Plugin;
 
 /*
@@ -14,6 +15,7 @@ public class ProxySystem extends Plugin {
      @Override
      public void onEnable() {
           instance = this;
+          DiscordBot.start();
      }
 
      @Override
