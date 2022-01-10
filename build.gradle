@@ -1,0 +1,62 @@
+plugins {
+    id 'java'
+    id 'com.github.johnrengelman.shadow' version '7.0.0'
+}
+
+group 'eu.hypetime.proxy'
+version '3.0-SNAPSHOT'
+
+compileJava.options.encoding = "UTF-8"
+compileTestJava.options.encoding = "UTF-8"
+
+repositories {
+    mavenCentral()
+    jcenter()
+    maven {
+        url 'https://papermc.io/repo/repository/maven-public/'
+    }
+    maven {
+        url "https://plugins.gradle.org/m2/"
+    }
+    maven {
+        url 'https://repo.cloudnetservice.eu/repository/releases/'
+    }
+    maven {
+        url 'https://m2.dv8tion.net/releases'
+    }
+    maven {
+        url 'https://oss.sonatype.org/content/repositories/snapshots/'
+    }
+    maven {
+        url 'https://mvnrepository.com/artifact/com.github.theholywaffle/teamspeak3-api'
+    }
+}
+
+dependencies {
+    testImplementation('org.junit.jupiter:junit-jupiter-api:5.8.1')
+    testRuntimeOnly('org.junit.jupiter:junit-jupiter-engine')
+    compileOnly("de.dytanic.cloudnet:cloudnet-driver:3.4.0-RELEASE")
+    compileOnly('de.dytanic.cloudnet:cloudnet-cloudperms:3.4.0-RELEASE')
+    compileOnly('org.json:json:20210307')
+    compileOnly('io.github.waterfallmc:waterfall-api:1.17-R0.1-SNAPSHOT')
+    implementation('gradle.plugin.com.github.jengelman.gradle.plugins:shadow:7.0.0')
+    compileOnly("dev.jaqobb:namemcapi:2.0.7")
+    implementation 'net.dv8tion:JDA:4.3.0_307'
+    implementation 'com.github.johnnyjayjay:CommandAPI:3.2'
+    implementation 'com.github.theholywaffle:teamspeak3-api:1.0.14'
+    implementation 'com.zaxxer:HikariCP:5.0.0'
+    implementation 'com.azuriom:azauth:1.0-SNAPSHOT'
+}
+
+shadowJar {
+    archiveBaseName = 'ProxySystem'
+    archiveClassifier = 'SNAPSHOT'
+    archiveVersion = '3.0'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+apply plugin: 'java'
+apply plugin: 'com.github.johnrengelman.shadow'
