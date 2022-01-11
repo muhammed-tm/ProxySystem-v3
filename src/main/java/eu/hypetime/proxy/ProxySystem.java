@@ -58,7 +58,6 @@ public class ProxySystem extends Plugin {
      }
 
      public void registerMessage() {
-          System.out.println("Start loading messages");
           english = fileManager.createNewFile("english.yml", getDataFolder().getAbsolutePath() + "/messages");
           german = fileManager.createNewFile("german.yml", getDataFolder().getAbsolutePath() + "/messages");
           englishCfg = fileManager.getConfiguration("english.yml", getDataFolder().getAbsolutePath() + "/messages");

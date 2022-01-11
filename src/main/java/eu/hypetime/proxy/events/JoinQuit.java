@@ -16,6 +16,7 @@ public class JoinQuit implements Listener {
      @EventHandler
      public void onJoin(PostLoginEvent event) {
           LanguageManager.register(event.getPlayer());
+          LanguageManager.sendMessage(event.getPlayer(), "join");
      }
 
      @EventHandler
