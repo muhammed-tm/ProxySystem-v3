@@ -71,12 +71,12 @@ public class ProxySystem extends Plugin {
           germanCfg.set("prefix", "&6Bungee &8| &7");
 
           //Not Found
-          englishCfg.set("msgNotFound", "Message was not found");
-          germanCfg.set("msgNotFound", "Nachricht wurde nicht gefunden");
+          englishCfg.set("msgNotFound", "%prefix% Message was not found");
+          germanCfg.set("msgNotFound", "%prefix% Nachricht wurde nicht gefunden");
 
           //Command not Found
-          englishCfg.set("cmdNotFound", "This command was not found in our system");
-          germanCfg.set("cmdNotFound", "Der Befehl wurden nicht gefunden");
+          englishCfg.set("cmdNotFound", "%prefix% This command was not found in our system");
+          germanCfg.set("cmdNotFound", "%prefix% Der Befehl wurden nicht gefunden");
 
           try {
                ConfigurationProvider.getProvider(YamlConfiguration.class).save(englishCfg, english);
