@@ -1,6 +1,9 @@
 package eu.hypetime.proxy;
 
 import eu.hypetime.proxy.bots.dc.DiscordBot;
+import eu.hypetime.proxy.database.MySQL;
+import eu.hypetime.proxy.database.MySQLConfig;
+import eu.hypetime.proxy.utils.FileManager;
 import net.md_5.bungee.api.plugin.Plugin;
 
 /*
@@ -11,10 +14,19 @@ import net.md_5.bungee.api.plugin.Plugin;
 public class ProxySystem extends Plugin {
 
      private static ProxySystem instance;
+     private FileManager fileManager;
+     private MySQL mySQL;
+
+     public static ProxySystem getInstance() {
+          return instance;
+     }
 
      @Override
      public void onEnable() {
           instance = this;
+          fileManager = new FileManager(this);
+          MySQLConfig mySQLConfig = new MySQLConfig(fileManager);
+          mySQL = mySQLConfig.mySQL;
           DiscordBot.start();
      }
 
@@ -23,7 +35,11 @@ public class ProxySystem extends Plugin {
 
      }
 
-     public static ProxySystem getInstance() {
-          return instance;
+     public FileManager getFileManager() {
+          return fileManager;
+     }
+
+     public MySQL getMySQL() {
+          return mySQL;
      }
 }

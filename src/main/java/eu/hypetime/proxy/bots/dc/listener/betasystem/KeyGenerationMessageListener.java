@@ -30,7 +30,7 @@ public class KeyGenerationMessageListener extends ListenerAdapter {
                     .charAt(index));
         }
         String key = sb.toString();
-       // ProxySystem.getProxySystem().getMySQL().update("INSERT INTO `proxy_BetaSystem` (`betakey`, `uuid`) VALUES('" + key + "', 'INVALID')");
+       // ProxySystem.getInstance().getMySQL().update("INSERT INTO `proxy_BetaSystem` (`betakey`, `uuid`) VALUES('" + key + "', 'INVALID')");
         return key;
     }
 }

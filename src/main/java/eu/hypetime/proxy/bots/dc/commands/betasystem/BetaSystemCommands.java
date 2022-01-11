@@ -67,7 +67,7 @@ public class BetaSystemCommands extends ListenerAdapter {
                });
                return;
           }
-          //ProxySystem.getProxySystem().getMySQL().update("UPDATE `proxy_BetaSystem` SET `uuid`='" + uuid + "' WHERE `betakey`='" + key + "'");
+          //ProxySystem.getInstance().getMySQL().update("UPDATE `proxy_BetaSystem` SET `uuid`='" + uuid + "' WHERE `betakey`='" + key + "'");
 
           event.getGuild().addRoleToMember(event.getMember(), betarole).queue();
           message.getAuthor().openPrivateChannel().complete().sendMessage("""
@@ -82,7 +82,7 @@ public class BetaSystemCommands extends ListenerAdapter {
      }
 
      private boolean checkKey(String key) {
-         /* ResultSet resultSet = ProxySystem.getProxySystem().getMySQL().getResult("SELECT * FROM `proxy_BetaSystem` WHERE `betakey`='" + key + "'");
+         /* ResultSet resultSet = ProxySystem.getInstance().getMySQL().getResult("SELECT * FROM `proxy_BetaSystem` WHERE `betakey`='" + key + "'");
           if (resultSet == null)
                return false;
           try {
@@ -100,7 +100,7 @@ public class BetaSystemCommands extends ListenerAdapter {
      }
 
      private boolean isUUIDForKey(String uuid) {
-         /* ResultSet resultSet = ProxySystem.getProxySystem().getMySQL().getResult("SELECT * FROM `proxy_BetaSystem` WHERE `uuid`='" + uuid + "'");
+         /* ResultSet resultSet = ProxySystem.getInstance().getMySQL().getResult("SELECT * FROM `proxy_BetaSystem` WHERE `uuid`='" + uuid + "'");
           if (resultSet == null)
                return false;
           try {

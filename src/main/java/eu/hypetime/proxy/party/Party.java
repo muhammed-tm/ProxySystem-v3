@@ -13,8 +13,8 @@ import java.util.HashMap;
 public class Party {
 
      public static HashMap<ProxiedPlayer, Party> partys = new HashMap<>();
-     private ProxiedPlayer leader;
      private final ArrayList<ProxiedPlayer> members = new ArrayList<>();
+     private ProxiedPlayer leader;
 
      public Party(ProxiedPlayer player) {
           this.leader = player;
