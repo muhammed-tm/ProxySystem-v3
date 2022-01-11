@@ -43,7 +43,7 @@ public class ProxySystem extends Plugin {
           mySQL = mySQLConfig.mySQL;
 
           registerMessage();
-          //DiscordBot.start();
+          DiscordBot.start();
 
           registerListener();
           registerCommands();

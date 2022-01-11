@@ -11,6 +11,7 @@ import eu.hypetime.proxy.bots.dc.utils.Logger;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
+import net.dv8tion.jda.api.OnlineStatus;
 import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.events.ReadyEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
@@ -22,13 +23,14 @@ import java.awt.*;
 public class DiscordBot extends ListenerAdapter {
 
      public static JDA jda;
-     public static String prefix = "ht!";
+     public static String prefix = "htb!";
 
      public static void start() {
           try {
-               jda = JDABuilder.createDefault("ODA2MjA5Njk2Mzg2MTIxNzI4.YBmHSg.w9D4TPwcfaGH7TRpU1BuuOfpmIU").build();
+               jda = JDABuilder.createDefault("OTMwNTg3OTI5MzIyMDk0NTkz.Yd4Diw.E04gLo9MW7UaZT-23zjH94r5aHs").build();
 
-               jda.getPresence().setActivity(Activity.playing("HypeTime.eu"));
+               jda.getPresence().setActivity(Activity.playing("Work on v3"));
+               jda.getPresence().setStatus(OnlineStatus.INVISIBLE);
 
                registerListener(new Commands());
                registerListener(new OwnChannel());

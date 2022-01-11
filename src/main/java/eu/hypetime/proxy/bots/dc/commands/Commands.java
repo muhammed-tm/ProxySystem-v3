@@ -23,7 +23,7 @@ public class Commands extends ListenerAdapter {
           }
           String message = event.getMessage().getContentRaw();
           if (message.length() >= 3) {
-               if (!message.substring(0, 3).equalsIgnoreCase(DiscordBot.prefix)) {
+               if (!message.substring(0, 4).equalsIgnoreCase(DiscordBot.prefix)) {
                     return;
                }
                String[] args = message.replace(DiscordBot.prefix, "").split(" ");
