@@ -1,6 +1,7 @@
 package eu.hypetime.proxy.lang;
 
 import eu.hypetime.proxy.ProxySystem;
+import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 
 import java.sql.ResultSet;
@@ -42,6 +43,12 @@ public class LanguageManager {
                exception.printStackTrace();
           }
           return null;
+     }
+
+     public static void sendMessage(ProxiedPlayer player, String messageShort) {
+          String message = Language.getConfig(player).getString(messageShort);
+          message = message.replace("%prefix%", ProxySystem.getInstance().getPrefix());
+          player.sendMessage(new TextComponent(message));
      }
 
 }
