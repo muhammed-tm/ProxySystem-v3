@@ -2,13 +2,13 @@
 
 Content:
 
+- LanguageManager
 - FriendSystem
 - PartySystem
-- LanguageManager
 - ClanSystem
 - BanSystem
-- WarnSystem
 - MuteSystem
+- WarnSystem
 - DiscordBot
 - TeamspeakBot
  
