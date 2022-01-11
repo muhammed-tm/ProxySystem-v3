@@ -21,10 +21,27 @@ public class LanguageManager {
 
      public static void register(ProxiedPlayer player) {
           int lang = 0;
-          if (getDataBaseLanguage(player) == null) language.put(player, lang);
           Integer databaseLanguage = getDataBaseLanguage(player);
+          if (databaseLanguage == null) language.put(player, lang);
           language.put(player, databaseLanguage);
 
+     }
+
+     public static void changeLanguage(ProxiedPlayer player, int id, boolean toggle) {
+          if(toggle) {
+               if(getLanguage(player) == 1) {
+                    setLanguage(player, 0);
+               } else if(getLanguage(player) == 0) {
+                    setLanguage(player, 1);
+               }
+          } else {
+               setLanguage(player, id);
+          }
+     }
+
+     public static void setLanguage(ProxiedPlayer player, int id) {
+          language.remove(player);
+          language.put(player, id);
      }
 
      public static void save(ProxiedPlayer player) {
@@ -49,9 +66,12 @@ public class LanguageManager {
 
      public static void sendMessage(ProxiedPlayer player, String messageShort) {
           Configuration config = Language.getConfig(player);
-          if(config.getString(messageShort) == null) messageShort = "msgNotFound";
           String message = config.getString(messageShort);
-          message = message.replace("%prefix%", config.getString("prefix"));
+          if(message.equals("")) messageShort = "msgNotFound";
+          message = config.getString(messageShort);
+          message = message.replace("%prefix% ", config.getString("prefix"));
+          message = message.replace("%player%", player.getName());
+          message = message.replace("%lang%", Language.getLanguage(getLanguage(player)).getName());
           player.sendMessage(new TextComponent(ChatColor.translateAlternateColorCodes('&', message)));
      }
 

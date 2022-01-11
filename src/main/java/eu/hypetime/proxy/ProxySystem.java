@@ -4,6 +4,7 @@ import eu.hypetime.proxy.bots.dc.DiscordBot;
 import eu.hypetime.proxy.database.MySQL;
 import eu.hypetime.proxy.database.MySQLConfig;
 import eu.hypetime.proxy.events.JoinQuit;
+import eu.hypetime.proxy.lang.LangCommand;
 import eu.hypetime.proxy.utils.FileManager;
 import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.plugin.Plugin;
@@ -42,9 +43,10 @@ public class ProxySystem extends Plugin {
           mySQL = mySQLConfig.mySQL;
 
           registerMessage();
-          DiscordBot.start();
+          //DiscordBot.start();
 
           registerListener();
+          registerCommands();
      }
 
      @Override
@@ -57,7 +59,14 @@ public class ProxySystem extends Plugin {
           pm.registerListener(this, new JoinQuit());
      }
 
+     public void registerCommands() {
+          PluginManager pm = ProxyServer.getInstance().getPluginManager();
+          pm.registerCommand(this, new LangCommand());
+     }
+
      public void registerMessage() {
+          System.out.println("!!!REGISTER MESSAGES!!!");
+
           english = fileManager.createNewFile("english.yml", getDataFolder().getAbsolutePath() + "/messages");
           german = fileManager.createNewFile("german.yml", getDataFolder().getAbsolutePath() + "/messages");
           englishCfg = fileManager.getConfiguration("english.yml", getDataFolder().getAbsolutePath() + "/messages");
@@ -76,6 +85,21 @@ public class ProxySystem extends Plugin {
           //Command not Found
           englishCfg.set("cmdNotFound", "%prefix% This command was not found in our system");
           germanCfg.set("cmdNotFound", "%prefix% Der Befehl wurden nicht gefunden");
+
+          //Change Language
+          englishCfg.set("changeSuc", "%prefix% Language was change to %lang%");
+          germanCfg.set("changeSuc", "%prefix% Sprache wurde zu %lang% geändert");
+
+          englishCfg.set("changeErr", "%prefix% Please use /lang <de/en/toggle>");
+          germanCfg.set("changeErr", "%prefix% Bitte nutze /lang <de/en/toggle>");
+
+          //PERSONALIZED
+          //Join
+
+          englishCfg.set("join", "%prefix% Welcome");
+          germanCfg.set("join", "%prefix% Willkommen");
+
+
 
           try {
                ConfigurationProvider.getProvider(YamlConfiguration.class).save(englishCfg, english);

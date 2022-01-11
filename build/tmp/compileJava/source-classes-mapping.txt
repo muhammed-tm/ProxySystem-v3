@@ -44,14 +44,14 @@ eu/hypetime/proxy/mute/MuteReasons.java
  eu.hypetime.proxy.mute.MuteReasons
 eu/hypetime/proxy/bots/dc/listener/Suggestion.java
  eu.hypetime.proxy.bots.dc.listener.Suggestion
-eu/hypetime/proxy/lang/LanguageManager.java
- eu.hypetime.proxy.lang.LanguageManager
 eu/hypetime/proxy/database/MySQLConfig.java
  eu.hypetime.proxy.database.MySQLConfig
-eu/hypetime/proxy/ProxySystem.java
- eu.hypetime.proxy.ProxySystem
 eu/hypetime/proxy/utils/FileManager.java
  eu.hypetime.proxy.utils.FileManager
+eu/hypetime/proxy/ProxySystem.java
+ eu.hypetime.proxy.ProxySystem
+eu/hypetime/proxy/lang/LanguageManager.java
+ eu.hypetime.proxy.lang.LanguageManager
 eu/hypetime/proxy/lang/Language.java
  eu.hypetime.proxy.lang.Language
 eu/hypetime/proxy/events/JoinQuit.java
