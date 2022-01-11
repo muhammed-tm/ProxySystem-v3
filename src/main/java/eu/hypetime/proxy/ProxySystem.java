@@ -23,7 +23,6 @@ public class ProxySystem extends Plugin {
      private File german;
      private Configuration englishCfg;
      private Configuration germanCfg;
-     private String prefix;
 
      public static ProxySystem getInstance() {
           return instance;
@@ -36,17 +35,36 @@ public class ProxySystem extends Plugin {
           MySQLConfig mySQLConfig = new MySQLConfig(fileManager);
           mySQL = mySQLConfig.mySQL;
 
-          english = fileManager.createNewFile("english.yml", getDataFolder().getAbsolutePath() + "/messages");
-          german = fileManager.createNewFile("german.yml", getDataFolder().getAbsolutePath() + "/messages");
-          englishCfg = fileManager.getConfiguration("english.yml", getDataFolder().getAbsolutePath() + "/messages");
-          germanCfg = fileManager.getConfiguration("german.yml", getDataFolder().getAbsolutePath() + "/messages");
+          registerMessage();
 
-          prefix = "§6HypeTime §8| §7";
           DiscordBot.start();
      }
 
      @Override
      public void onDisable() {
+
+     }
+
+     public void registerMessage() {
+
+          english = fileManager.createNewFile("english.yml", getDataFolder().getAbsolutePath() + "/messages");
+          german = fileManager.createNewFile("german.yml", getDataFolder().getAbsolutePath() + "/messages");
+          englishCfg = fileManager.getConfiguration("english.yml", getDataFolder().getAbsolutePath() + "/messages");
+          germanCfg = fileManager.getConfiguration("german.yml", getDataFolder().getAbsolutePath() + "/messages");
+
+          //DEFAULT
+          //Prefix
+
+          englishCfg.set("prefix", "&6Proxy &8| &7");
+          germanCfg.set("prefix", "&6Bungee &8| &7");
+
+          //Not Found
+          englishCfg.set("msgNotFound", "Message was not found");
+          germanCfg.set("msgNotFound", "Nachricht wurde nicht gefunden");
+
+          //Command not Found
+          englishCfg.set("cmdNotFound", "This command was not found in our system");
+          germanCfg.set("cmdNotFound", "Der Befehl wurden nicht gefunden");
 
      }
 
@@ -74,7 +92,4 @@ public class ProxySystem extends Plugin {
           return germanCfg;
      }
 
-     public String getPrefix() {
-          return prefix;
-     }
 }

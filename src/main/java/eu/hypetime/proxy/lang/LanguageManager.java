@@ -1,8 +1,10 @@
 package eu.hypetime.proxy.lang;
 
 import eu.hypetime.proxy.ProxySystem;
+import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
+import net.md_5.bungee.config.Configuration;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -46,9 +48,10 @@ public class LanguageManager {
      }
 
      public static void sendMessage(ProxiedPlayer player, String messageShort) {
-          String message = Language.getConfig(player).getString(messageShort);
-          message = message.replace("%prefix%", ProxySystem.getInstance().getPrefix());
-          player.sendMessage(new TextComponent(message));
+          Configuration config = Language.getConfig(player);
+          String message = config.getString(messageShort);
+          message = message.replace("%prefix%", config.getString("prefix"));
+          player.sendMessage(new TextComponent(ChatColor.translateAlternateColorCodes('&', message)));
      }
 
 }
