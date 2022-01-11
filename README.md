@@ -11,7 +11,7 @@ Content:
 - WarnSystem
 - DiscordBot
 - TeamspeakBot
-
+- VerifySystem
 
 ## How to use LanguageManager
 
