@@ -49,6 +49,7 @@ public class LanguageManager {
 
      public static void sendMessage(ProxiedPlayer player, String messageShort) {
           Configuration config = Language.getConfig(player);
+          if(config.getString(messageShort) == null) messageShort = "msgNotFound";
           String message = config.getString(messageShort);
           message = message.replace("%prefix%", config.getString("prefix"));
           player.sendMessage(new TextComponent(ChatColor.translateAlternateColorCodes('&', message)));

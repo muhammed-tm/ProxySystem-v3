@@ -52,6 +52,10 @@ shadowJar {
     archiveBaseName = 'ProxySystem'
     archiveClassifier = 'SNAPSHOT'
     archiveVersion = '3.0'
+    copy {
+        from 'build/libs/ProxySystem-3.0-SNAPSHOT.jar'
+        into "D:\\Cloud\\local\\templates\\Proxy\\default\\plugins"
+    }
 }
 
 test {

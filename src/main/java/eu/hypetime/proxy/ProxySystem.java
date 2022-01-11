@@ -3,11 +3,17 @@ package eu.hypetime.proxy;
 import eu.hypetime.proxy.bots.dc.DiscordBot;
 import eu.hypetime.proxy.database.MySQL;
 import eu.hypetime.proxy.database.MySQLConfig;
+import eu.hypetime.proxy.events.JoinQuit;
 import eu.hypetime.proxy.utils.FileManager;
+import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.plugin.Plugin;
+import net.md_5.bungee.api.plugin.PluginManager;
 import net.md_5.bungee.config.Configuration;
+import net.md_5.bungee.config.ConfigurationProvider;
+import net.md_5.bungee.config.YamlConfiguration;
 
 import java.io.File;
+import java.io.IOException;
 
 /*
     Created by Andre
@@ -36,8 +42,9 @@ public class ProxySystem extends Plugin {
           mySQL = mySQLConfig.mySQL;
 
           registerMessage();
-
           DiscordBot.start();
+
+          registerListener();
      }
 
      @Override
@@ -45,8 +52,13 @@ public class ProxySystem extends Plugin {
 
      }
 
-     public void registerMessage() {
+     public void registerListener() {
+          PluginManager pm = ProxyServer.getInstance().getPluginManager();
+          pm.registerListener(this, new JoinQuit());
+     }
 
+     public void registerMessage() {
+          System.out.println("Start loading messages");
           english = fileManager.createNewFile("english.yml", getDataFolder().getAbsolutePath() + "/messages");
           german = fileManager.createNewFile("german.yml", getDataFolder().getAbsolutePath() + "/messages");
           englishCfg = fileManager.getConfiguration("english.yml", getDataFolder().getAbsolutePath() + "/messages");
@@ -65,6 +77,14 @@ public class ProxySystem extends Plugin {
           //Command not Found
           englishCfg.set("cmdNotFound", "This command was not found in our system");
           germanCfg.set("cmdNotFound", "Der Befehl wurden nicht gefunden");
+
+          try {
+               ConfigurationProvider.getProvider(YamlConfiguration.class).save(englishCfg, english);
+               ConfigurationProvider.getProvider(YamlConfiguration.class).save(germanCfg, german);
+          } catch (IOException e) {
+               e.printStackTrace();
+          }
+
 
      }
 
