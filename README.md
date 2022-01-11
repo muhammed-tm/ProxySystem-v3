@@ -1,6 +1,6 @@
 # ProxySystem | HypeTime v3
 
-Inhalt:
+Content:
 
 - FriendSystem
 - PartySystem
