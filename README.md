@@ -11,5 +11,8 @@ Content:
 - WarnSystem
 - DiscordBot
 - TeamspeakBot
- 
 
+
+## How to use LanguageManager
+
+`LanguageManager.sendMessage(player, "messageNameInFile");`
