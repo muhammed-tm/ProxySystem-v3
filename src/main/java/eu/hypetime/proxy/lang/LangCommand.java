@@ -26,12 +26,14 @@ public class LangCommand extends Command {
                          if(args[0].equalsIgnoreCase("toggle")) {
                               LanguageManager.changeLanguage(player, 0, true);
                          } else {
-                              LanguageManager.changeLanguage(player, Language.getLanguageByShort(args[0].substring(0, 1)).getId(), false);
+                              LanguageManager.changeLanguage(player, Language.getLanguageByShort(args[0].substring(0, 2)).getId(), false);
                          }
                          LanguageManager.sendMessage(player, "changeSuc");
                     } else {
                          LanguageManager.sendMessage(player, "changeErr");
                     }
+               } else {
+                    LanguageManager.sendMessage(player, "changeErr");
                }
           } else {
                sender.sendMessage("Only Player");

@@ -45,14 +45,14 @@ public enum Language {
      public static ArrayList<String> getShorts() {
           ArrayList<String> shorts = new ArrayList<>();
           for (Language language : Language.values()) {
-               shorts.add(language.getName().substring(0, 1).toLowerCase());
+               shorts.add(language.getName().substring(0, 2).toLowerCase());
           }
           return shorts;
      }
 
      public static Language getLanguageByShort(String idShort) {
           for (Language language : Language.values()) {
-               if(language.getName().substring(0, 1).equalsIgnoreCase(idShort)) {
+               if(language.getName().substring(0, 2).equalsIgnoreCase(idShort)) {
                     return language;
                }
           }
