@@ -20,7 +20,8 @@ public class LangCommand extends Command {
 
      @Override
      public void execute(CommandSender sender, String[] args) {
-          if (sender instanceof ProxiedPlayer player) {
+          if (sender instanceof ProxiedPlayer) {
+               ProxiedPlayer player = (ProxiedPlayer) sender;
                if (args.length == 1) {
                     if (Language.getShorts().contains(args[0].toLowerCase()) || args[0].equalsIgnoreCase("toggle")) {
                          if(args[0].equalsIgnoreCase("toggle")) {

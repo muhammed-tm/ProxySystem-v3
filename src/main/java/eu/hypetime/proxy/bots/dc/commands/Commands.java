@@ -78,7 +78,7 @@ public class Commands extends ListenerAdapter {
                               return;
                          }
                          event.getChannel().getManager().putPermissionOverride(member, 3072L, 8192L).queue();
-                         event.getChannel().sendMessage("Der Benutzer " + member.getAsMention() + " wurde hinzugefügt.").queue();
+                         event.getChannel().sendMessage("Der Benutzer " + member.getAsMention() + " wurde hinzugefWügt.").queue();
                     }
                     if (command.equalsIgnoreCase("remove")) {
 
@@ -104,7 +104,7 @@ public class Commands extends ListenerAdapter {
                               event.getChannel().sendMessage("Bitte nutze ht!help").queue();
                               return;
                          }
-                         event.getChannel().sendMessage("Seite 1").queue(message1 -> message1.addReaction("▶️").queue());
+                         event.getChannel().sendMessage("Seite 1").queue(message1 -> message1.addReaction("??").queue());
                     }
 
                     if (command.equalsIgnoreCase("clear")) {
@@ -125,10 +125,9 @@ public class Commands extends ListenerAdapter {
                     if (command.equalsIgnoreCase("restart")) {
                          event.getChannel().sendMessage("Die Proxy wird neugestartet.").queue();
                          ProxyServer.getInstance().stop(
-                              """
-                                   §8§m                                       \s
-                                   §6§lHypeTimeEU §7is restarting§8.
-                                   §8§m                                       \s""");
+                                   "§8§m                                       \n"+
+                                   "§6§lHypeTimeEU §7is restarting§8."+
+                                   "§8§m                                       \n");
                     }
                }
 
@@ -140,14 +139,14 @@ public class Commands extends ListenerAdapter {
           Message message = event.getChannel().retrieveMessageById(event.getMessageId()).complete();
 
           if (event.getUser().isBot()) return;
-          if (event.getReactionEmote().getAsReactionCode().equals("▶️")) {
+          if (event.getReactionEmote().getAsReactionCode().equals("??")) {
                message.editMessage("Seite 2").queue();
                event.getReaction().clearReactions().queue();
-               message.addReaction("◀️").queue();
-          } else if (event.getReactionEmote().getAsReactionCode().equals("◀️")) {
+               message.addReaction("??").queue();
+          } else if (event.getReactionEmote().getAsReactionCode().equals("??")) {
                message.editMessage("Seite 1").queue();
                event.getReaction().clearReactions().queue();
-               message.addReaction("▶️").queue();
+               message.addReaction("??").queue();
           }
      }
 
