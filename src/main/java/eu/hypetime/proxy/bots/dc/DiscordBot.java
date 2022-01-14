@@ -6,7 +6,7 @@ import eu.hypetime.proxy.bots.dc.commands.stats.top5Command;
 import eu.hypetime.proxy.bots.dc.commands.verifysystem.VerifySystemCommand;
 import eu.hypetime.proxy.bots.dc.listener.*;
 import eu.hypetime.proxy.bots.dc.listener.betasystem.KeyGenerationMessageListener;
-import eu.hypetime.proxy.bots.dc.listener.betasystem.TicketRatingListener;
+import eu.hypetime.proxy.bots.dc.listener.TicketRatingListener;
 import eu.hypetime.proxy.bots.dc.ticket.TicketListener;
 import eu.hypetime.proxy.bots.dc.utils.Logger;
 import net.dv8tion.jda.api.EmbedBuilder;

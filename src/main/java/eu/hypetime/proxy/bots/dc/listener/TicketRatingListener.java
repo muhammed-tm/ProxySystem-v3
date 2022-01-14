@@ -1,4 +1,4 @@
-package eu.hypetime.proxy.bots.dc.listener.betasystem;
+package eu.hypetime.proxy.bots.dc.listener;
 
 import eu.hypetime.proxy.bots.dc.DiscordBot;
 import net.dv8tion.jda.api.EmbedBuilder;
@@ -48,7 +48,13 @@ public class TicketRatingListener extends ListenerAdapter {
         SelectOption option = event.getSelectedOptions().get(0);
         if (option.getValue().equalsIgnoreCase("5star")) {
             DiscordBot.jda.getTextChannelById("931631956515495996").sendMessage(member.getEffectiveName() + " hat eine **5 Sterne** Bewertung da gelassen, für den Ticket Support. ```⭐⭐⭐⭐⭐``` ").queue();
-            event.getMessage().delete().queue();
+            //event.getMessage().delete().queue();
+            EmbedBuilder thanks5a4 = new EmbedBuilder();
+            thanks5a4.setTitle("Vielen Dank");
+            thanks5a4.addField("Wir danken dir für deine Bewerbung. ", option.getLabel(), false);
+            MessageBuilder builder = new MessageBuilder();
+            builder.setEmbed(thanks5a4.build());
+            event.editMessage(builder.build()).queue();
             event.reply(member.getEffectiveName() + " Vielen Dank für die Bewertung! ").queue();
 
         }
