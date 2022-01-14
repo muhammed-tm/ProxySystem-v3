@@ -50,13 +50,13 @@ eu/hypetime/proxy/ProxySystem.java
  eu.hypetime.proxy.ProxySystem
 eu/hypetime/proxy/bots/dc/commands/Commands.java
  eu.hypetime.proxy.bots.dc.commands.Commands
+eu/hypetime/proxy/bots/dc/apply/Apply.java
+ eu.hypetime.proxy.bots.dc.apply.Apply
+eu/hypetime/proxy/bots/dc/ticket/Ticket.java
+ eu.hypetime.proxy.bots.dc.ticket.Ticket
+eu/hypetime/proxy/bots/dc/listener/MCConnection.java
+ eu.hypetime.proxy.bots.dc.listener.MCConnection
 eu/hypetime/proxy/bots/dc/DiscordBot.java
  eu.hypetime.proxy.bots.dc.DiscordBot
 eu/hypetime/proxy/bots/dc/listener/SelfRoles.java
  eu.hypetime.proxy.bots.dc.listener.SelfRoles
-eu/hypetime/proxy/bots/dc/listener/MCConnection.java
- eu.hypetime.proxy.bots.dc.listener.MCConnection
-eu/hypetime/proxy/bots/dc/ticket/Ticket.java
- eu.hypetime.proxy.bots.dc.ticket.Ticket
-eu/hypetime/proxy/bots/dc/apply/Apply.java
- eu.hypetime.proxy.bots.dc.apply.Apply
