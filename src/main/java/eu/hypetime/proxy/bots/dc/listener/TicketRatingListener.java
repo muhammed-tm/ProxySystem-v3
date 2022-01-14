@@ -4,6 +4,7 @@ import eu.hypetime.proxy.bots.dc.DiscordBot;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.MessageBuilder;
 import net.dv8tion.jda.api.entities.Member;
+import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.events.interaction.SelectionMenuEvent;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
@@ -46,28 +47,34 @@ public class TicketRatingListener extends ListenerAdapter {
         if (menu.getId().equalsIgnoreCase("rating"))
             if (event.getSelectedOptions().size() < 1) return;
         SelectOption option = event.getSelectedOptions().get(0);
+        EmbedBuilder thanks5a4 = new EmbedBuilder();
+        thanks5a4.setTitle("Vielen Dank");
+        thanks5a4.addField("Wir danken dir für deine Bewerbung. ", option.getLabel(), false);
+        MessageBuilder builder = new MessageBuilder();
+        builder.setEmbed(thanks5a4.build());
         if (option.getValue().equalsIgnoreCase("5star")) {
             DiscordBot.jda.getTextChannelById("931631956515495996").sendMessage(member.getEffectiveName() + " hat eine **5 Sterne** Bewertung da gelassen, für den Ticket Support. ```⭐⭐⭐⭐⭐``` ").queue();
-            //event.getMessage().delete().queue();
-            EmbedBuilder thanks5a4 = new EmbedBuilder();
-            thanks5a4.setTitle("Vielen Dank");
-            thanks5a4.addField("Wir danken dir für deine Bewerbung. ", option.getLabel(), false);
-            MessageBuilder builder = new MessageBuilder();
-            builder.setEmbed(thanks5a4.build());
-            event.editMessage(builder.build()).queue();
-            event.reply(member.getEffectiveName() + " Vielen Dank für die Bewertung! ").queue();
+            event.getMessage().delete().queue();
+            event.getChannel().sendMessage(builder.build()).queue();
 
         }
         if (option.getValue().equalsIgnoreCase("4star")) {
             DiscordBot.jda.getTextChannelById("931631956515495996").sendMessage(member.getEffectiveName() + " hat eine **4 Sterne** Bewertung da gelassen, für den Ticket Support. ```⭐⭐⭐⭐``` ").queue();
             event.getMessage().delete().queue();
-            event.reply(member.getEffectiveName() + " Vielen Dank für die Bewertung! ").queue();
+            event.getChannel().sendMessage(builder.build()).queue();
 
         }
+        EmbedBuilder threetwoone = new EmbedBuilder();
+        threetwoone.setTitle("Vielen Dank");
+        threetwoone.addField("Vielen Dank für die Bewertung. Schade das der Support dir nicht so gefallen hat.",
+                "Bei Vorschlägen bitte den <#693213433696485426> Kanal nutzen.", false);
+        MessageBuilder threetwoonem = new MessageBuilder();
+        threetwoonem.setEmbed(threetwoone.build());
+        Message message = threetwoonem.build();
         if (option.getValue().equalsIgnoreCase("3star")) {
             DiscordBot.jda.getTextChannelById("931631956515495996").sendMessage(member.getEffectiveName() + " hat eine **3 Sterne** Bewertung da gelassen, für den Ticket Support. ```⭐⭐⭐``` ").queue();
             event.getMessage().delete().queue();
-            event.reply(member.getEffectiveName() + " Vielen Dank für die Bewertung. Schade das der Support dir nicht so gefallen hat. \nBei Vorschlägen bitte den <#693213433696485426> Kanal nutzen. ").queue();
+            event.getChannel().sendMessage(threetwoone.build());
         }
         if (option.getValue().equalsIgnoreCase("2star")) {
             DiscordBot.jda.getTextChannelById("931631956515495996").sendMessage(member.getEffectiveName() + " hat eine **2 Sterne** Bewertung da gelassen, für den Ticket Support. ```⭐⭐``` ").queue();

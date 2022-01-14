@@ -26,6 +26,10 @@ public class DiscordBot extends ListenerAdapter {
     public static JDA jda;
     public static String prefix = "htb!";
 
+    public static void main(String[] args) {
+        start();
+    }
+
     public static void start() {
         try {
             jda = JDABuilder.createDefault("OTMwNTg3OTI5MzIyMDk0NTkz.Yd4Diw.E04gLo9MW7UaZT-23zjH94r5aHs").build();
