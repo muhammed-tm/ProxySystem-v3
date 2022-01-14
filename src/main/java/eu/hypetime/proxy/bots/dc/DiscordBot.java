@@ -38,6 +38,7 @@ public class DiscordBot extends ListenerAdapter {
             registerListener(new TicketListener());
             registerListener(new JoinListener());
             registerListener(new DiscordBot());
+            registerListener(new SelfRoles());
             registerListener(new RulesListener());
             registerListener(new KeyGenerationMessageListener());
             registerListener(new BetaSystemCommands());

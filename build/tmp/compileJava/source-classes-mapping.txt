@@ -32,8 +32,8 @@ eu/hypetime/proxy/lang/LangCommand.java
  eu.hypetime.proxy.lang.LangCommand
 eu/hypetime/proxy/bots/dc/apply/ApplyListener.java
  eu.hypetime.proxy.bots.dc.apply.ApplyListener
-eu/hypetime/proxy/bots/dc/listener/OwnChannel.java
- eu.hypetime.proxy.bots.dc.listener.OwnChannel
+eu/hypetime/proxy/bots/dc/listener/Suggestion.java
+ eu.hypetime.proxy.bots.dc.listener.Suggestion
 eu/hypetime/proxy/bots/dc/commands/verifysystem/VerifySystemCommand.java
  eu.hypetime.proxy.bots.dc.commands.verifysystem.VerifySystemCommand
 eu/hypetime/proxy/party/Party.java
@@ -44,14 +44,16 @@ eu/hypetime/proxy/lang/Language.java
  eu.hypetime.proxy.lang.Language
 eu/hypetime/proxy/mute/MuteReasons.java
  eu.hypetime.proxy.mute.MuteReasons
-eu/hypetime/proxy/bots/dc/listener/Suggestion.java
- eu.hypetime.proxy.bots.dc.listener.Suggestion
+eu/hypetime/proxy/bots/dc/listener/OwnChannel.java
+ eu.hypetime.proxy.bots.dc.listener.OwnChannel
 eu/hypetime/proxy/ProxySystem.java
  eu.hypetime.proxy.ProxySystem
 eu/hypetime/proxy/bots/dc/commands/Commands.java
  eu.hypetime.proxy.bots.dc.commands.Commands
 eu/hypetime/proxy/bots/dc/DiscordBot.java
  eu.hypetime.proxy.bots.dc.DiscordBot
+eu/hypetime/proxy/bots/dc/listener/SelfRoles.java
+ eu.hypetime.proxy.bots.dc.listener.SelfRoles
 eu/hypetime/proxy/bots/dc/listener/MCConnection.java
  eu.hypetime.proxy.bots.dc.listener.MCConnection
 eu/hypetime/proxy/bots/dc/ticket/Ticket.java

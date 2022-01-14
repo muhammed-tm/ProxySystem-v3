@@ -55,6 +55,7 @@ shadowJar {
 
     copy {
         from 'build/libs/ProxySystem-3.0-SNAPSHOT.jar'
+        delete("C:\\Cloud\\local\\templates\\Proxy\\default\\plugins\\ProxySystem-3.0-SNAPSHOT.jar")
         into "C:\\Cloud\\local\\templates\\Proxy\\default\\plugins"
     }
 }

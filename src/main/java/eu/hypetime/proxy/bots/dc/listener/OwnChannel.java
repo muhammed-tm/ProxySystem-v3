@@ -12,7 +12,7 @@ public class OwnChannel extends ListenerAdapter {
 
      @Override
      public void onGuildVoiceMove(GuildVoiceMoveEvent event) {
-          if (event.getChannelJoined().getId().equalsIgnoreCase("832711758061502524")) {
+          if (event.getChannelJoined().getId().equalsIgnoreCase("931559904672632852")) {
                Member member = event.getMember();
                event.getGuild().createVoiceChannel(member.getEffectiveName(), event.getGuild().getCategoryById("693213387634638891")).queue();
           }
@@ -23,7 +23,7 @@ public class OwnChannel extends ListenerAdapter {
 
      @Override
      public void onGuildVoiceJoin(GuildVoiceJoinEvent event) {
-          if (event.getChannelJoined().getId().equalsIgnoreCase("832711758061502524")) {
+          if (event.getChannelJoined().getId().equalsIgnoreCase("931559904672632852")) {
                Member member = event.getMember();
                event.getGuild().createVoiceChannel(member.getEffectiveName(), event.getGuild().getCategoryById("693213387634638891")).queue();
           }
