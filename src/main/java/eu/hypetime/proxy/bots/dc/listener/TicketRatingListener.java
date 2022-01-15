@@ -66,25 +66,26 @@ public class TicketRatingListener extends ListenerAdapter {
         }
         EmbedBuilder threetwoone = new EmbedBuilder();
         threetwoone.setTitle("Vielen Dank");
-        threetwoone.addField("Vielen Dank für die Bewertung. Schade das der Support dir nicht so gefallen hat.",
+        threetwoone.addField("Vielen Dank für die Bewertung.", "" + option.getLabel(), false);
+        threetwoone.addField("Schade das der Support dir nicht so gefallen hat.",
                 "Bei Vorschlägen bitte den <#693213433696485426> Kanal nutzen.", false);
-        MessageBuilder threetwoonem = new MessageBuilder();
-        threetwoonem.setEmbed(threetwoone.build());
-        Message message = threetwoonem.build();
+        MessageBuilder threetwoonemb = new MessageBuilder();
+        threetwoonemb.setEmbed(threetwoone.build());
+        Message threetwoonem = threetwoonemb.build();
         if (option.getValue().equalsIgnoreCase("3star")) {
             DiscordBot.jda.getTextChannelById("931631956515495996").sendMessage(member.getEffectiveName() + " hat eine **3 Sterne** Bewertung da gelassen, für den Ticket Support. ```⭐⭐⭐``` ").queue();
             event.getMessage().delete().queue();
-            event.getChannel().sendMessage(threetwoone.build());
+            event.getChannel().sendMessage(threetwoonem).queue();
         }
         if (option.getValue().equalsIgnoreCase("2star")) {
             DiscordBot.jda.getTextChannelById("931631956515495996").sendMessage(member.getEffectiveName() + " hat eine **2 Sterne** Bewertung da gelassen, für den Ticket Support. ```⭐⭐``` ").queue();
             event.getMessage().delete().queue();
-            event.reply(member.getEffectiveName() + " Vielen Dank für die Bewertung. Schade das der Support dir nicht so gefallen hat. \nBei Vorschlägen bitte den <#693213433696485426> Kanal nutzen. ").queue();
+        event.getChannel().sendMessage(threetwoonem).queue();;
         }
         if (option.getValue().equalsIgnoreCase("1star")) {
             DiscordBot.jda.getTextChannelById("931631956515495996").sendMessage(member.getEffectiveName() + " hat eine **1 Sterne** Bewertung da gelassen, für den Ticket Support. ```⭐``` ").queue();
             event.getMessage().delete().queue();
-            event.reply(member.getEffectiveName() + " Vielen Dank für die Bewertung. Schade das der Support dir nicht so gefallen hat. \nBei Vorschlägen bitte den <#693213433696485426> Kanal nutzen. ").queue();
+            event.getChannel().sendMessage(threetwoonem).queue();
         }
     }
 }
