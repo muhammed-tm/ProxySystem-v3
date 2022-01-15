@@ -9,6 +9,7 @@
 *.log
 *.txt
 *.lock
+*.bin
 
 # BlueJ files
 *.ctxt
