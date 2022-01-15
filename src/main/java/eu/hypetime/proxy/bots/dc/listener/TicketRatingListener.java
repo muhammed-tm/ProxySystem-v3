@@ -13,6 +13,8 @@ import net.dv8tion.jda.api.interactions.components.selections.SelectOption;
 import net.dv8tion.jda.api.interactions.components.selections.SelectionMenu;
 import org.jetbrains.annotations.NotNull;
 
+import java.awt.*;
+
 public class TicketRatingListener extends ListenerAdapter {
 
     @Override
@@ -48,7 +50,8 @@ public class TicketRatingListener extends ListenerAdapter {
             if (event.getSelectedOptions().size() < 1) return;
         SelectOption option = event.getSelectedOptions().get(0);
         EmbedBuilder thanks5a4 = new EmbedBuilder();
-        thanks5a4.setTitle("Vielen Dank");
+        thanks5a4.setColor(Color.GREEN);
+        thanks5a4.setTitle("Support Bewertung");
         thanks5a4.addField("Wir danken dir für deine Bewerbung. ", option.getLabel(), false);
         MessageBuilder builder = new MessageBuilder();
         builder.setEmbed(thanks5a4.build());
@@ -65,7 +68,8 @@ public class TicketRatingListener extends ListenerAdapter {
 
         }
         EmbedBuilder threetwoone = new EmbedBuilder();
-        threetwoone.setTitle("Vielen Dank");
+        threetwoone.setColor(Color.YELLOW);
+        threetwoone.setTitle("Support Bewertung");
         threetwoone.addField("Vielen Dank für die Bewertung.", "" + option.getLabel(), false);
         threetwoone.addField("Schade das der Support dir nicht so gefallen hat.",
                 "Bei Vorschlägen bitte den <#693213433696485426> Kanal nutzen.", false);
