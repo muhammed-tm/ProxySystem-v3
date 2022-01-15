@@ -52,7 +52,7 @@ public class TicketRatingListener extends ListenerAdapter {
         EmbedBuilder thanks5a4 = new EmbedBuilder();
         thanks5a4.setColor(Color.GREEN);
         thanks5a4.setTitle("Support Bewertung");
-        thanks5a4.addField("Wir danken dir für deine Bewerbung. ", option.getLabel(), false);
+        thanks5a4.addField("Wir danken dir für deine Bewertung. ", option.getLabel(), false);
         MessageBuilder builder = new MessageBuilder();
         builder.setEmbed(thanks5a4.build());
         if (option.getValue().equalsIgnoreCase("5star")) {
