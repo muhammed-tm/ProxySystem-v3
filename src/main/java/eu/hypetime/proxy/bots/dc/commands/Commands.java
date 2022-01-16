@@ -2,6 +2,7 @@ package eu.hypetime.proxy.bots.dc.commands;
 
 import eu.hypetime.proxy.bots.dc.DiscordBot;
 import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.MessageBuilder;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Member;
@@ -10,8 +11,11 @@ import net.dv8tion.jda.api.entities.Role;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.events.message.guild.react.GuildMessageReactionAddEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
+import net.dv8tion.jda.api.interactions.components.ActionRow;
+import net.dv8tion.jda.api.interactions.components.Button;
 import net.md_5.bungee.api.ProxyServer;
 
+import java.awt.*;
 import java.util.Objects;
 
 public class Commands extends ListenerAdapter {
@@ -83,7 +87,7 @@ public class Commands extends ListenerAdapter {
                     if (command.equalsIgnoreCase("remove")) {
 
                          if (!event.getChannel().getName().contains("ticket-")) {
-                              event.getChannel().sendMessage("Bitte stelle sicher, dass dies in einem Apply geschrieben wird.").queue();
+                              event.getChannel().sendMessage("Bitte stelle sicher, dass dies in einem Ticket geschrieben wird.").queue();
 
                               return;
                          }
@@ -128,6 +132,9 @@ public class Commands extends ListenerAdapter {
                                    "§8§m                                       \n"+
                                    "§6§lHypeTimeEU §7is restarting§8."+
                                    "§8§m                                       \n");
+                    }
+                    if(command.equalsIgnoreCase("claim")) {
+
                     }
                }
 
