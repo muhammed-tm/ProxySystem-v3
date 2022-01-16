@@ -36,15 +36,7 @@ public class TicketListener extends ListenerAdapter {
                });
                Role role = event.getGuild().getRoleById(793602273954496532L);
                if (!event.getMember().getRoles().contains(role)) {
-                    EmbedBuilder builder = new EmbedBuilder();
-                    builder.setColor(Color.YELLOW);
-                    builder.setTitle("Support Claim");
-                    builder.addField("Bitte drücke auf den Knopf zum claimen des Tickets.", "(Nur für Teammitglieder).", true);
-                    MessageBuilder mBuilder = new MessageBuilder();
-                    mBuilder.setEmbed(builder.build());
-                    mBuilder.setActionRows(ActionRow.of(Button.success("claimticket", "Ticket claimen")));
-                    event.getChannel().sendMessage(mBuilder.build()).queue();
-                    if (TicketManager.getTicket(event.getUser().getId()) == null) {
+                   if (TicketManager.getTicket(event.getUser().getId()) == null) {
                          new Ticket(event);
                     } else if (event.getGuild().getTextChannelsByName("ticket-" + event.getUser().getName(), true).size() == 0) {
                          new Ticket(event);
