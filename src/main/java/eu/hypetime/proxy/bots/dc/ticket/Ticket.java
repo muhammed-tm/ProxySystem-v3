@@ -13,7 +13,9 @@ import net.dv8tion.jda.api.interactions.components.ActionRow;
 import net.dv8tion.jda.api.interactions.components.Button;
 
 import java.awt.*;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Objects;
 
 public class Ticket {
@@ -21,7 +23,8 @@ public class Ticket {
      private final String userID;
      private final String channelID;
      private final ArrayList<String> messages = new ArrayList<>();
-     private String supporterID;
+     private Member supporter;
+     private String create;
 
      public Ticket(ButtonClickEvent event) {
           EmbedBuilder builder = new EmbedBuilder();
@@ -35,7 +38,8 @@ public class Ticket {
           channel.sendMessage(mBuilder.build()).queue();
           this.userID = event.getUser().getId();
           this.channelID = channel.getId();
-          this.supporterID = "";
+          SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss");
+          this.create = sdf.format(new Date(System.currentTimeMillis()));
           getChannel().upsertPermissionOverride(Objects.requireNonNull(event.getMember()))
                .setAllow(Permission.MESSAGE_WRITE)
                .setAllow(Permission.VIEW_CHANNEL)
@@ -74,16 +78,20 @@ public class Ticket {
           return DiscordBot.jda.getTextChannelById(channelID);
      }
 
+     public String getCreate() {
+          return create;
+     }
+
      public ArrayList<String> getMessages() {
           return messages;
      }
 
-     public String getSupporterID() {
-          return supporterID;
+     public Member getSupporter() {
+          return supporter;
      }
 
      public void setSupporterID(Member member, Message message) {
-          this.supporterID = member.getId();
+          this.supporter = member;
           message.delete().queue();
           EmbedBuilder builder = new EmbedBuilder();
           builder.setTitle("Ticket");
@@ -92,6 +100,5 @@ public class Ticket {
           MessageBuilder messageBuilder = new MessageBuilder();
           messageBuilder.setEmbed(builder.build());
           getChannel().sendMessage(messageBuilder.build()).queue();
-
      }
 }

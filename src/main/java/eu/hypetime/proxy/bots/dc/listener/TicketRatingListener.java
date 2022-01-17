@@ -1,6 +1,8 @@
 package eu.hypetime.proxy.bots.dc.listener;
 
 import eu.hypetime.proxy.bots.dc.DiscordBot;
+import eu.hypetime.proxy.bots.dc.ticket.Ticket;
+import eu.hypetime.proxy.bots.dc.ticket.TicketManager;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.MessageBuilder;
 import net.dv8tion.jda.api.entities.Member;
@@ -56,13 +58,13 @@ public class TicketRatingListener extends ListenerAdapter {
         MessageBuilder builder = new MessageBuilder();
         builder.setEmbed(thanks5a4.build());
         if (option.getValue().equalsIgnoreCase("5star")) {
-            DiscordBot.jda.getTextChannelById("931631956515495996").sendMessage(member.getEffectiveName() + " hat eine **5 Sterne** Bewertung da gelassen, für den Ticket Support. ```⭐⭐⭐⭐⭐``` ").queue();
+            //DiscordBot.jda.getTextChannelById("931631956515495996").sendMessage(member.getEffectiveName() + " hat eine **5 Sterne** Bewertung da gelassen, für den Ticket Support. ```⭐⭐⭐⭐⭐``` ").queue();
             event.getMessage().delete().queue();
             event.getChannel().sendMessage(builder.build()).queue();
 
         }
         if (option.getValue().equalsIgnoreCase("4star")) {
-            DiscordBot.jda.getTextChannelById("931631956515495996").sendMessage(member.getEffectiveName() + " hat eine **4 Sterne** Bewertung da gelassen, für den Ticket Support. ```⭐⭐⭐⭐``` ").queue();
+            //DiscordBot.jda.getTextChannelById("931631956515495996").sendMessage(member.getEffectiveName() + " hat eine **4 Sterne** Bewertung da gelassen, für den Ticket Support. ```⭐⭐⭐⭐``` ").queue();
             event.getMessage().delete().queue();
             event.getChannel().sendMessage(builder.build()).queue();
 
@@ -77,19 +79,32 @@ public class TicketRatingListener extends ListenerAdapter {
         threetwoonemb.setEmbed(threetwoone.build());
         Message threetwoonem = threetwoonemb.build();
         if (option.getValue().equalsIgnoreCase("3star")) {
-            DiscordBot.jda.getTextChannelById("931631956515495996").sendMessage(member.getEffectiveName() + " hat eine **3 Sterne** Bewertung da gelassen, für den Ticket Support. ```⭐⭐⭐``` ").queue();
+            //DiscordBot.jda.getTextChannelById("931631956515495996").sendMessage(member.getEffectiveName() + " hat eine **3 Sterne** Bewertung da gelassen, für den Ticket Support. ```⭐⭐⭐``` ").queue();
             event.getMessage().delete().queue();
             event.getChannel().sendMessage(threetwoonem).queue();
         }
         if (option.getValue().equalsIgnoreCase("2star")) {
-            DiscordBot.jda.getTextChannelById("931631956515495996").sendMessage(member.getEffectiveName() + " hat eine **2 Sterne** Bewertung da gelassen, für den Ticket Support. ```⭐⭐``` ").queue();
+            //DiscordBot.jda.getTextChannelById("931631956515495996").sendMessage(member.getEffectiveName() + " hat eine **2 Sterne** Bewertung da gelassen, für den Ticket Support. ```⭐⭐``` ").queue();
             event.getMessage().delete().queue();
         event.getChannel().sendMessage(threetwoonem).queue();;
         }
         if (option.getValue().equalsIgnoreCase("1star")) {
-            DiscordBot.jda.getTextChannelById("931631956515495996").sendMessage(member.getEffectiveName() + " hat eine **1 Sterne** Bewertung da gelassen, für den Ticket Support. ```⭐``` ").queue();
+            //DiscordBot.jda.getTextChannelById("931631956515495996").sendMessage(member.getEffectiveName() + " hat eine **1 Sterne** Bewertung da gelassen, für den Ticket Support. ```⭐``` ").queue();
             event.getMessage().delete().queue();
             event.getChannel().sendMessage(threetwoonem).queue();
+        }
+        Ticket ticket = TicketManager.getTicketByChannel(event.getChannel().getId());
+        if(ticket != null) {
+            EmbedBuilder ratingBuilder = new EmbedBuilder();
+            ratingBuilder.setTitle("Rating");
+            ratingBuilder.addField("Ticket von:", event.getGuild().getMemberById(ticket.getUserID()).getEffectiveName(), false);
+            ratingBuilder.addField("Bewertung: ", option.getLabel(), false);
+            ratingBuilder.addField("Bearbeiter: ", ticket.getSupporter().getEffectiveName(), false);
+            ratingBuilder.addField("Erstellt: ", ticket.getCreate(), false);
+            ratingBuilder.setColor(Color.YELLOW);
+            MessageBuilder ratingMessageBuilder = new MessageBuilder();
+            ratingMessageBuilder.setEmbed(ratingBuilder.build());
+            DiscordBot.jda.getTextChannelById("931631956515495996").sendMessage(ratingMessageBuilder.build()).queue();
         }
     }
 }
