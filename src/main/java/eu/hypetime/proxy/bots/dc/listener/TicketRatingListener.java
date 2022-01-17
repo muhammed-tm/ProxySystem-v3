@@ -16,6 +16,8 @@ import net.dv8tion.jda.api.interactions.components.selections.SelectionMenu;
 import org.jetbrains.annotations.NotNull;
 
 import java.awt.*;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class TicketRatingListener extends ListenerAdapter {
 
@@ -101,6 +103,8 @@ public class TicketRatingListener extends ListenerAdapter {
             ratingBuilder.addField("Bewertung: ", option.getLabel(), false);
             ratingBuilder.addField("Bearbeiter: ", ticket.getSupporter().getEffectiveName(), false);
             ratingBuilder.addField("Erstellt: ", ticket.getCreate(), false);
+            SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss");
+            ratingBuilder.setFooter("Gesendet: " + sdf.format(new Date(System.currentTimeMillis())), "https://images.hypetime.eu/images/2022/01/15/HypeTimeLogoclean.png");
             ratingBuilder.setColor(Color.YELLOW);
             MessageBuilder ratingMessageBuilder = new MessageBuilder();
             ratingMessageBuilder.setEmbed(ratingBuilder.build());

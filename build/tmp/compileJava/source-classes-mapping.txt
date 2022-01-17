@@ -48,17 +48,17 @@ eu/hypetime/proxy/mute/MuteReasons.java
  eu.hypetime.proxy.mute.MuteReasons
 eu/hypetime/proxy/bots/dc/listener/Suggestion.java
  eu.hypetime.proxy.bots.dc.listener.Suggestion
-eu/hypetime/proxy/bots/dc/listener/TicketRatingListener.java
- eu.hypetime.proxy.bots.dc.listener.TicketRatingListener
-eu/hypetime/proxy/bots/dc/commands/stats/top5Command.java
- eu.hypetime.proxy.bots.dc.commands.stats.top5Command
-eu/hypetime/proxy/bots/dc/ticket/Ticket.java
- eu.hypetime.proxy.bots.dc.ticket.Ticket
-eu/hypetime/proxy/bots/dc/ticket/TicketManager.java
- eu.hypetime.proxy.bots.dc.ticket.TicketManager
 eu/hypetime/proxy/bots/dc/commands/Commands.java
  eu.hypetime.proxy.bots.dc.commands.Commands
+eu/hypetime/proxy/bots/dc/commands/stats/top5Command.java
+ eu.hypetime.proxy.bots.dc.commands.stats.top5Command
 eu/hypetime/proxy/bots/dc/ticket/TicketListener.java
  eu.hypetime.proxy.bots.dc.ticket.TicketListener
+eu/hypetime/proxy/bots/dc/ticket/TicketManager.java
+ eu.hypetime.proxy.bots.dc.ticket.TicketManager
+eu/hypetime/proxy/bots/dc/ticket/Ticket.java
+ eu.hypetime.proxy.bots.dc.ticket.Ticket
 eu/hypetime/proxy/bots/dc/DiscordBot.java
  eu.hypetime.proxy.bots.dc.DiscordBot
+eu/hypetime/proxy/bots/dc/listener/TicketRatingListener.java
+ eu.hypetime.proxy.bots.dc.listener.TicketRatingListener
