@@ -5,7 +5,6 @@ import com.mongodb.BasicDBObject;
 import com.mongodb.client.MongoCollection;
 import eu.hypetime.proxy.ProxySystem;
 import eu.hypetime.proxy.utils.UUIDFetcher;
-import io.github.waterfallmc.waterfall.utils.UUIDUtils;
 import net.md_5.bungee.api.CommandSender;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 import org.bson.Document;
@@ -28,7 +27,7 @@ public class BanManager {
 
      public static void ban(UUID uuid, BanReasons reason, CommandSender banner) {
           if (isBanned(uuid)) {
-               banner.sendMessage("Der Spieler ist bereits gebannt");
+               banner.sendMessage("§7Der Spieler ist bereits gebannt");
                return;
           }
           String name = UUIDFetcher.getName(uuid);
@@ -38,29 +37,26 @@ public class BanManager {
           } else {
                player = new BanPlayer(name, reason, "System");
           }
-          BasicDBObject query = new BasicDBObject("uuid", uuid);
-          Document doc = (new Document()).append("uuid", uuid).append("banPlayer", gson.toJson(player));
-          collection.findOneAndReplace(query, doc);
-          if(isBanned(uuid)) {
-               banner.sendMessage("Der Spieler " + name + " wurde erfolgreich gebannt.");
-          }
+          Document doc = (new Document()).append("uuid", uuid.toString()).append("banPlayer", gson.toJson(player));
+          collection.insertOne(doc);
+          banner.sendMessage("§7Der Spieler §6" + name + " §7wurde erfolgreich gebannt.");
      }
 
      public static void unban(UUID uuid, CommandSender sender) {
-          if(!isBanned(uuid)) {
+          if (!isBanned(uuid)) {
                sender.sendMessage("Der Spieler ist nicht gebannt.");
                return;
           }
-          BasicDBObject query = new BasicDBObject("uuid", uuid);
+          BasicDBObject query = new BasicDBObject("uuid", uuid.toString());
           collection.find(query).first().clear();
-          if(!isBanned(uuid)) {
-               sender.sendMessage("Der Spieler " + UUIDFetcher.getName(uuid) + " wurde entbannt");
+          if (!isBanned(uuid)) {
+               sender.sendMessage("§7Der Spieler §6" + UUIDFetcher.getName(uuid) + " §7wurde entbannt");
           }
      }
 
      public static boolean isBanned(UUID uuid) {
           boolean isBanned;
-          BasicDBObject query = new BasicDBObject("uuid", uuid);
+          BasicDBObject query = new BasicDBObject("uuid", uuid.toString());
           isBanned = collection.find(query).first() != null;
           return isBanned;
      }

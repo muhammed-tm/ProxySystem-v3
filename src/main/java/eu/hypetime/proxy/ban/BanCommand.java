@@ -1,6 +1,7 @@
 package eu.hypetime.proxy.ban;
 
 import eu.hypetime.proxy.ProxySystem;
+import eu.hypetime.proxy.utils.UUIDFetcher;
 import net.md_5.bungee.api.CommandSender;
 import net.md_5.bungee.api.plugin.Command;
 
@@ -26,7 +27,7 @@ public class BanCommand extends Command {
                          sendBanReasons(sender);
                          return;
                     }
-                    BanManager.ban(UUID.fromString(args[0]), reason, sender);
+                    BanManager.ban(UUIDFetcher.getUUID(args[0]), reason, sender);
                } catch(NumberFormatException exception) {
                     sender.sendMessage("§7Bitte nutze /ban <Spieler> <ID(Grund)>");
                     sendBanReasons(sender);
@@ -40,7 +41,9 @@ public class BanCommand extends Command {
      public void sendBanReasons(CommandSender sender) {
           sender.sendMessage("§8§m          §r§8[§6BanSystem§8]§m          ");
           for (BanReasons reason : BanReasons.values()) {
-               sender.sendMessage("§7Reason§8: §6" + reason.getName() + " §8| §7Id§8: §6" + reason.getId());
+               if(reason.getId() != 100) {
+                    sender.sendMessage("§7Reason§8: §6" + reason.getName() + " §8| §7Id§8: §6" + reason.getId());
+               }
           }
           sender.sendMessage("§8§m          §r§8[§6BanSystem§8]§m          ");
      }
