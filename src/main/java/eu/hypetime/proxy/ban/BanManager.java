@@ -25,7 +25,7 @@ public class BanManager {
           collection = ProxySystem.getInstance().getMongoDB().getDatabase().getCollection("proxy_ban");
      }
 
-     public static void ban(UUID uuid, BanReasons reason, CommandSender banner) {
+     public void ban(UUID uuid, BanReasons reason, CommandSender banner) {
           if (isBanned(uuid)) {
                banner.sendMessage("§7Der Spieler ist bereits gebannt");
                return;
@@ -42,32 +42,87 @@ public class BanManager {
           banner.sendMessage("§7Der Spieler §6" + name + " §7wurde erfolgreich gebannt.");
      }
 
-     public static void unban(UUID uuid, CommandSender sender) {
+     public void unban(UUID uuid, CommandSender sender) {
           if (!isBanned(uuid)) {
                sender.sendMessage("Der Spieler ist nicht gebannt.");
                return;
           }
           BasicDBObject query = new BasicDBObject("uuid", uuid.toString());
           collection.find(query).first().clear();
-          if (!isBanned(uuid)) {
-               sender.sendMessage("§7Der Spieler §6" + UUIDFetcher.getName(uuid) + " §7wurde entbannt");
-          }
+          sender.sendMessage("§7Der Spieler §6" + UUIDFetcher.getName(uuid) + " §7wurde entbannt");
      }
 
-     public static boolean isBanned(UUID uuid) {
+     public boolean isBanned(UUID uuid) {
           boolean isBanned;
           BasicDBObject query = new BasicDBObject("uuid", uuid.toString());
           isBanned = collection.find(query).first() != null;
           return isBanned;
      }
 
-     public static BanPlayer getBanPlayer(UUID uuid) {
+     public BanPlayer getBanPlayer(UUID uuid) {
           if (isBanned(uuid)) {
-               BasicDBObject query = new BasicDBObject("uuid", uuid);
-               return gson.fromJson(collection.find(query).first().get("friendPlayer").toString(), BanPlayer.class);
+               BasicDBObject query = new BasicDBObject("uuid", uuid.toString());
+               return gson.fromJson(collection.find(query).first().get("banPlayer").toString(), BanPlayer.class);
           } else {
                return null;
           }
      }
+
+     public String getReason(UUID uuid) {
+          if(isBanned(uuid))
+               return getBanPlayer(uuid).getReason();
+          else
+               return "";
+     }
+
+     public long getEnd(UUID uuid) {
+          if(isBanned(uuid))
+               return getBanPlayer(uuid).getEnd();
+          else
+               return 0;
+     }
+
+     public String getBanner(UUID uuid) {
+          if(isBanned(uuid))
+               return getBanPlayer(uuid).getBanner();
+          else
+               return "";
+     }
+
+     public String getReamainingTime(UUID uuid) {
+          long current = System.currentTimeMillis();
+          long end = getBanPlayer(uuid).getEnd();
+          if (end == -1) {
+               return "§c§lPERMANENT";
+          }
+          long millis = end - current;
+          long seconds = 0;
+          long minutes = 0;
+          long hours = 0;
+          long days = 0;
+          long weeks = 0;
+          while (millis > 1000) {
+               millis -= 1000;
+               ++seconds;
+          }
+          while (seconds > 60) {
+               seconds -= 60;
+               ++minutes;
+          }
+          while (minutes > 60) {
+               minutes -= 60;
+               ++hours;
+          }
+          while (hours > 24) {
+               hours -= 24;
+               ++days;
+          }
+          while (days > 7) {
+               days -= 7;
+               ++weeks;
+          }
+          return "§e" + weeks + " Woche(n) " + days + " Tag(e) " + hours + " Stunde(n) " + minutes + " Minute(n) " + seconds + " Sekunde(n) ";
+     }
+
 
 }

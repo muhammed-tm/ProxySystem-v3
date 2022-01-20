@@ -27,7 +27,7 @@ public class BanCommand extends Command {
                          sendBanReasons(sender);
                          return;
                     }
-                    BanManager.ban(UUIDFetcher.getUUID(args[0]), reason, sender);
+                    ProxySystem.getInstance().getBanManager().ban(UUIDFetcher.getUUID(args[0]), reason, sender);
                } catch(NumberFormatException exception) {
                     sender.sendMessage("§7Bitte nutze /ban <Spieler> <ID(Grund)>");
                     sendBanReasons(sender);

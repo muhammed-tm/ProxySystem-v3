@@ -1,9 +1,8 @@
 package eu.hypetime.proxy.database;
 
 import com.mongodb.MongoClient;
-import com.mongodb.client.MongoCollection;
+import com.mongodb.MongoClientURI;
 import com.mongodb.client.MongoDatabase;
-import org.bson.Document;
 
 /*
     Created by Andre
@@ -16,7 +15,7 @@ public class MongoDB {
      private final MongoDatabase database;
 
      public MongoDB() {
-          client = new MongoClient("193.135.10.148", 27017);
+          client = new MongoClient(new MongoClientURI("mongodb://193.135.10.148:27017/?readPreference=primary&appname=mongosh+1.1.9&directConnection=true&ssl=false"));
           database = client.getDatabase("minecraft");
      }
 
