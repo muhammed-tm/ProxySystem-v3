@@ -1,6 +1,8 @@
 package eu.hypetime.proxy;
 
+import eu.hypetime.proxy.ban.BanManager;
 import eu.hypetime.proxy.bots.dc.DiscordBot;
+import eu.hypetime.proxy.database.MongoDB;
 import eu.hypetime.proxy.database.MySQL;
 import eu.hypetime.proxy.database.MySQLConfig;
 import eu.hypetime.proxy.events.JoinQuit;
@@ -30,6 +32,8 @@ public class ProxySystem extends Plugin {
      private File german;
      private Configuration englishCfg;
      private Configuration germanCfg;
+     private MongoDB mongoDB;
+     private BanManager banManager;
 
      public static ProxySystem getInstance() {
           return instance;
@@ -41,6 +45,8 @@ public class ProxySystem extends Plugin {
           fileManager = new FileManager(this);
           MySQLConfig mySQLConfig = new MySQLConfig(fileManager);
           mySQL = mySQLConfig.mySQL;
+          mongoDB = new MongoDB();
+          banManager = new BanManager();
 
           registerMessage();
           DiscordBot.start();
@@ -100,7 +106,6 @@ public class ProxySystem extends Plugin {
           germanCfg.set("join", "%prefix% Willkommen");
 
 
-
           try {
                ConfigurationProvider.getProvider(YamlConfiguration.class).save(englishCfg, english);
                ConfigurationProvider.getProvider(YamlConfiguration.class).save(germanCfg, german);
@@ -117,6 +122,14 @@ public class ProxySystem extends Plugin {
 
      public MySQL getMySQL() {
           return mySQL;
+     }
+
+     public MongoDB getMongoDB() {
+          return mongoDB;
+     }
+
+     public BanManager getBanManager() {
+          return banManager;
      }
 
      public File getEnglish() {

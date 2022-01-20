@@ -12,19 +12,19 @@ import java.util.HashMap;
 */
 public class Party {
 
-     public static HashMap<ProxiedPlayer, Party> partys = new HashMap<>();
+     public static HashMap<ProxiedPlayer, Party> partyHashMap = new HashMap<>();
      private final ArrayList<ProxiedPlayer> members = new ArrayList<>();
      private ProxiedPlayer leader;
 
      public Party(ProxiedPlayer player) {
           this.leader = player;
 
-          partys.put(player, this);
+          partyHashMap.put(player, this);
      }
 
      public static Party getPartyByLeader(ProxiedPlayer partyLeader) {
-          if (partys.get(partyLeader) != null) {
-               return partys.get(partyLeader);
+          if (partyHashMap.get(partyLeader) != null) {
+               return partyHashMap.get(partyLeader);
           } else {
                return new Party(partyLeader);
           }
@@ -35,7 +35,7 @@ public class Party {
      }
 
      public void setLeader(ProxiedPlayer player) {
-          partys.get(this.leader).leader = player;
+          partyHashMap.get(this.leader).leader = player;
      }
 
      public ArrayList<ProxiedPlayer> getMembers() {

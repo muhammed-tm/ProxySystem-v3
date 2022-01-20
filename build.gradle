@@ -45,6 +45,7 @@ dependencies {
     implementation 'com.github.johnnyjayjay:CommandAPI:3.2'
     implementation 'com.github.theholywaffle:teamspeak3-api:1.0.14'
     implementation 'com.zaxxer:HikariCP:5.0.0'
+    implementation 'org.mongodb:mongodb-driver:3.3.0'
     implementation 'com.azuriom:azauth:1.0-SNAPSHOT'
 }
 
