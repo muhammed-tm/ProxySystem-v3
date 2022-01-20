@@ -1,5 +1,6 @@
 package eu.hypetime.proxy;
 
+import eu.hypetime.proxy.ban.BanCommand;
 import eu.hypetime.proxy.ban.BanManager;
 import eu.hypetime.proxy.bots.dc.DiscordBot;
 import eu.hypetime.proxy.database.MongoDB;
@@ -68,6 +69,7 @@ public class ProxySystem extends Plugin {
      public void registerCommands() {
           PluginManager pm = ProxyServer.getInstance().getPluginManager();
           pm.registerCommand(this, new LangCommand());
+          pm.registerCommand(this, new BanCommand());
      }
 
      public void registerMessage() {
