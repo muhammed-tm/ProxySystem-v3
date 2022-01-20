@@ -1,11 +1,13 @@
 package eu.hypetime.proxy.bots.dc.ticket;
 
 import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.MessageBuilder;
 import net.dv8tion.jda.api.entities.Role;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.events.interaction.ButtonClickEvent;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
+import net.dv8tion.jda.api.interactions.components.ActionRow;
 import net.dv8tion.jda.api.interactions.components.Button;
 
 import java.awt.*;
@@ -16,16 +18,17 @@ public class TicketListener extends ListenerAdapter {
      @Override
      public void onButtonClick(ButtonClickEvent event) {
           if (event.getUser().isBot()) return;
-          if (event.getButton().getId().equalsIgnoreCase("ticket") && event.getChannel().getId().equals("717408277255684242")) {
+          if (event.getButton().getId().equalsIgnoreCase("ticket1")
+                  && event.getChannel().getId().equals("833688139511758908")) {
                event.deferReply(true).queue(response -> {
                     Role role = event.getGuild().getRoleById(793602273954496532L);
                     if (!event.getMember().getRoles().contains(role)) {
                          if (TicketManager.getTicket(event.getUser().getId()) == null) {
-                              response.editOriginal(":white_check_mark: Dein Apply wird erstellt...").queue();
+                              response.editOriginal(":white_check_mark: Dein Ticket wird erstellt...").queue();
                          } else if (event.getGuild().getTextChannelsByName("ticket-" + event.getUser().getName(), true).size() == 0) {
-                              response.editOriginal(":white_check_mark: Dein Apply wird erstellt...").queue();
+                              response.editOriginal(":white_check_mark: Dein Ticket wird erstellt...").queue();
                          } else {
-                              response.editOriginal("❌ Du hast bereits ein Apply offen!").queue();
+                              response.editOriginal("❌ Du hast bereits ein Ticket offen!").queue();
                          }
                     } else {
                          response.editOriginal("❌ Du hast einen Support Bann!").queue();
@@ -33,7 +36,7 @@ public class TicketListener extends ListenerAdapter {
                });
                Role role = event.getGuild().getRoleById(793602273954496532L);
                if (!event.getMember().getRoles().contains(role)) {
-                    if (TicketManager.getTicket(event.getUser().getId()) == null) {
+                   if (TicketManager.getTicket(event.getUser().getId()) == null) {
                          new Ticket(event);
                     } else if (event.getGuild().getTextChannelsByName("ticket-" + event.getUser().getName(), true).size() == 0) {
                          new Ticket(event);
@@ -47,6 +50,11 @@ public class TicketListener extends ListenerAdapter {
                          }
                     }
                }
+          } else if(event.getButton().getId().contains("claimticket")) {
+               Role role = event.getGuild().getRoleById(717408268678594591L);
+               if(event.getMember().getRoles().contains(role)) {
+                    TicketManager.getTicketByChannel(event.getChannel().getId()).setSupporterID(event.getMember(), event.getMessage());
+               }
           }
      }
 
@@ -59,7 +67,7 @@ public class TicketListener extends ListenerAdapter {
                     Ticket ticket = TicketManager.getTicketByChannel(event.getChannel().getId());
                     ticket.getMessages().add(event.getAuthor().getAsTag() + " : " + event.getMessage().getContentRaw());
                }
-               if (event.getMessage().getContentDisplay().equalsIgnoreCase("ht!close")) {
+               if (event.getMessage().getContentDisplay().equalsIgnoreCase("htb!close")) {
                     if (event.getChannel().getParent().getId().equalsIgnoreCase("693213391724216321")) {
                          Role role = event.getGuild().getRoleById(717408268678594591L);
                          if (event.getMember().getRoles().contains(role)) {
@@ -93,18 +101,20 @@ public class TicketListener extends ListenerAdapter {
                               }
                          }
                     } else {
-                         event.getChannel().sendMessage("Das Apply in 20 Sekunden entgültig gelöscht.").queue();
+                         event.getChannel().sendMessage("Das Ticket in 20 Sekunden entgültig gelöscht.").queue();
                          event.getChannel().delete().queueAfter(20, TimeUnit.SECONDS);
                     }
                }
-          } else if (event.getMember().getUser().getId().equals("567694483647627294") && event.getMessage().getContentDisplay().equalsIgnoreCase("-ticket")) {
+          } else if (event.getMember().getUser().getId().equals("367292204248727553")
+                  && event.getMessage().getContentDisplay().equalsIgnoreCase("ht!ticket")) {
                event.getMessage().delete().queue();
                EmbedBuilder builder = new EmbedBuilder();
-               builder.setTitle("Apply-Support");
+               builder.setTitle("Ticket-Support");
                builder.setColor(Color.YELLOW);
-               builder.setDescription("Drücke den Knopf um ein Apply zu eröffnen.");
+               builder.setDescription("Drücke den Knopf um ein Ticket zu eröffnen.");
                builder.setAuthor(event.getGuild().getSelfMember().getEffectiveName(), event.getGuild().getIconUrl());
-               event.getGuild().getTextChannelById("833688139511758908").sendMessage(builder.build()).setActionRow(Button.success("ticket", "🎫️ Apply öffnen")).queue();
+               event.getGuild().getTextChannelById("833688139511758908")
+                       .sendMessage(builder.build()).setActionRow(Button.success("ticket1", "🎫️ Ticket öffnen")).queue();
           }
      }
 }

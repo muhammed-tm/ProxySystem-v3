@@ -2,6 +2,7 @@ package eu.hypetime.proxy.bots.dc.commands;
 
 import eu.hypetime.proxy.bots.dc.DiscordBot;
 import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.MessageBuilder;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Member;
@@ -10,8 +11,11 @@ import net.dv8tion.jda.api.entities.Role;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.events.message.guild.react.GuildMessageReactionAddEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
+import net.dv8tion.jda.api.interactions.components.ActionRow;
+import net.dv8tion.jda.api.interactions.components.Button;
 import net.md_5.bungee.api.ProxyServer;
 
+import java.awt.*;
 import java.util.Objects;
 
 public class Commands extends ListenerAdapter {
@@ -23,7 +27,7 @@ public class Commands extends ListenerAdapter {
           }
           String message = event.getMessage().getContentRaw();
           if (message.length() >= 3) {
-               if (!message.substring(0, 4).equalsIgnoreCase(DiscordBot.prefix)) {
+               if (!message.startsWith(DiscordBot.prefix)) {
                     return;
                }
                String[] args = message.replace(DiscordBot.prefix, "").split(" ");
@@ -78,12 +82,12 @@ public class Commands extends ListenerAdapter {
                               return;
                          }
                          event.getChannel().getManager().putPermissionOverride(member, 3072L, 8192L).queue();
-                         event.getChannel().sendMessage("Der Benutzer " + member.getAsMention() + " wurde hinzugefügt.").queue();
+                         event.getChannel().sendMessage("Der Benutzer " + member.getAsMention() + " wurde hinzugefWügt.").queue();
                     }
                     if (command.equalsIgnoreCase("remove")) {
 
                          if (!event.getChannel().getName().contains("ticket-")) {
-                              event.getChannel().sendMessage("Bitte stelle sicher, dass dies in einem Apply geschrieben wird.").queue();
+                              event.getChannel().sendMessage("Bitte stelle sicher, dass dies in einem Ticket geschrieben wird.").queue();
 
                               return;
                          }
@@ -104,7 +108,7 @@ public class Commands extends ListenerAdapter {
                               event.getChannel().sendMessage("Bitte nutze ht!help").queue();
                               return;
                          }
-                         event.getChannel().sendMessage("Seite 1").queue(message1 -> message1.addReaction("▶️").queue());
+                         event.getChannel().sendMessage("Seite 1").queue(message1 -> message1.addReaction("??").queue());
                     }
 
                     if (command.equalsIgnoreCase("clear")) {
@@ -125,10 +129,12 @@ public class Commands extends ListenerAdapter {
                     if (command.equalsIgnoreCase("restart")) {
                          event.getChannel().sendMessage("Die Proxy wird neugestartet.").queue();
                          ProxyServer.getInstance().stop(
-                              """
-                                   §8§m                                       \s
-                                   §6§lHypeTimeEU §7is restarting§8.
-                                   §8§m                                       \s""");
+                                   "§8§m                                       \n"+
+                                   "§6§lHypeTimeEU §7is restarting§8."+
+                                   "§8§m                                       \n");
+                    }
+                    if(command.equalsIgnoreCase("claim")) {
+
                     }
                }
 
@@ -140,14 +146,14 @@ public class Commands extends ListenerAdapter {
           Message message = event.getChannel().retrieveMessageById(event.getMessageId()).complete();
 
           if (event.getUser().isBot()) return;
-          if (event.getReactionEmote().getAsReactionCode().equals("▶️")) {
+          if (event.getReactionEmote().getAsReactionCode().equals("??")) {
                message.editMessage("Seite 2").queue();
                event.getReaction().clearReactions().queue();
-               message.addReaction("◀️").queue();
-          } else if (event.getReactionEmote().getAsReactionCode().equals("◀️")) {
+               message.addReaction("??").queue();
+          } else if (event.getReactionEmote().getAsReactionCode().equals("??")) {
                message.editMessage("Seite 1").queue();
                event.getReaction().clearReactions().queue();
-               message.addReaction("▶️").queue();
+               message.addReaction("??").queue();
           }
      }
 

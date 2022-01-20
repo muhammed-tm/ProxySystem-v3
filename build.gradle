@@ -35,10 +35,10 @@ repositories {
 dependencies {
     testImplementation('org.junit.jupiter:junit-jupiter-api:5.8.1')
     testRuntimeOnly('org.junit.jupiter:junit-jupiter-engine')
+    compileOnly('io.github.waterfallmc:waterfall-api:1.17-R0.1-SNAPSHOT')
     compileOnly("de.dytanic.cloudnet:cloudnet-driver:3.4.0-RELEASE")
     compileOnly('de.dytanic.cloudnet:cloudnet-cloudperms:3.4.0-RELEASE')
     compileOnly('org.json:json:20210307')
-    compileOnly('io.github.waterfallmc:waterfall-api:1.17-R0.1-SNAPSHOT')
     implementation('gradle.plugin.com.github.jengelman.gradle.plugins:shadow:7.0.0')
     compileOnly("dev.jaqobb:namemcapi:2.0.7")
     implementation 'net.dv8tion:JDA:4.3.0_307'
@@ -52,9 +52,11 @@ shadowJar {
     archiveBaseName = 'ProxySystem'
     archiveClassifier = 'SNAPSHOT'
     archiveVersion = '3.0'
+
     copy {
         from 'build/libs/ProxySystem-3.0-SNAPSHOT.jar'
-        into "D:\\Cloud\\local\\templates\\Proxy\\default\\plugins"
+        delete("C:\\Cloud\\local\\templates\\Proxy\\default\\plugins\\ProxySystem-3.0-SNAPSHOT.jar")
+        into "C:\\Cloud\\local\\templates\\Proxy\\default\\plugins"
     }
 }
 
