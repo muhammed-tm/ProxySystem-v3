@@ -4,6 +4,8 @@ import com.google.gson.Gson;
 import com.mongodb.BasicDBObject;
 import com.mongodb.client.MongoCollection;
 import eu.hypetime.proxy.ProxySystem;
+import eu.hypetime.proxy.utils.UUIDFetcher;
+import io.github.waterfallmc.waterfall.utils.UUIDUtils;
 import net.md_5.bungee.api.CommandSender;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 import org.bson.Document;
@@ -24,11 +26,12 @@ public class BanManager {
           collection = ProxySystem.getInstance().getMongoDB().getDatabase().getCollection("proxy_ban");
      }
 
-     public static void ban(UUID uuid, String name, BanReasons reason, CommandSender banner) {
+     public static void ban(UUID uuid, BanReasons reason, CommandSender banner) {
           if (isBanned(uuid)) {
                banner.sendMessage("Der Spieler ist bereits gebannt");
                return;
           }
+          String name = UUIDFetcher.getName(uuid);
           BanPlayer player;
           if (banner instanceof ProxiedPlayer) {
                player = new BanPlayer(name, reason, banner.getName());
@@ -43,6 +46,18 @@ public class BanManager {
           }
      }
 
+     public static void unban(UUID uuid, CommandSender sender) {
+          if(!isBanned(uuid)) {
+               sender.sendMessage("Der Spieler ist nicht gebannt.");
+               return;
+          }
+          BasicDBObject query = new BasicDBObject("uuid", uuid);
+          collection.find(query).first().clear();
+          if(!isBanned(uuid)) {
+               sender.sendMessage("Der Spieler " + UUIDFetcher.getName(uuid) + " wurde entbannt");
+          }
+     }
+
      public static boolean isBanned(UUID uuid) {
           boolean isBanned;
           BasicDBObject query = new BasicDBObject("uuid", uuid);
@@ -50,7 +65,7 @@ public class BanManager {
           return isBanned;
      }
 
-     public BanPlayer getBanPlayer(UUID uuid) {
+     public static BanPlayer getBanPlayer(UUID uuid) {
           if (isBanned(uuid)) {
                BasicDBObject query = new BasicDBObject("uuid", uuid);
                return gson.fromJson(collection.find(query).first().get("friendPlayer").toString(), BanPlayer.class);

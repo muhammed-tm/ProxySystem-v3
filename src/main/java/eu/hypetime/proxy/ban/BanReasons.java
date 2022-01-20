@@ -8,7 +8,8 @@ package eu.hypetime.proxy.ban;
 public enum BanReasons {
 
      HACKING(1, "Cheating", -1),
-     OTHER(99, "Other", 1);
+     OTHER(99, "Other", 1),
+     NOT_DEFINED(100, "Not defined", -1);
 
      private int id;
      private String name;
@@ -38,6 +39,6 @@ public enum BanReasons {
                     return reason;
                }
           }
-          return BanReasons.HACKING;
+          return NOT_DEFINED;
      }
 }
