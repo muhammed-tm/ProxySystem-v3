@@ -18,69 +18,72 @@ import java.util.HashMap;
 */
 public class LanguageManager {
 
-    public static HashMap<ProxiedPlayer, Integer> language = new HashMap<>();
+     public static HashMap<ProxiedPlayer, Integer> language = new HashMap<>();
 
-    public static void register(ProxiedPlayer player) {
-        int lang = 0;
-        Integer databaseLanguage = getDataBaseLanguage(player);
-        if (databaseLanguage == null) language.put(player, lang);
-        language.put(player, databaseLanguage);
+     public static void register(ProxiedPlayer player) {
+          int lang = 0;
+          Integer databaseLanguage = getDataBaseLanguage(player);
+          if (databaseLanguage == null) language.put(player, lang);
+          language.put(player, databaseLanguage);
 
-    }
+     }
 
-    public static void changeLanguage(ProxiedPlayer player, int id, boolean toggle) {
-        if (toggle) {
-            if (getLanguage(player) == 1) {
-                setLanguage(player, 0);
-            } else if (getLanguage(player) == 0) {
-                setLanguage(player, 1);
-            }
-        } else {
-            setLanguage(player, id);
-        }
-    }
+     public static void changeLanguage(ProxiedPlayer player, int id, boolean toggle) {
+          if (toggle) {
+               if (getLanguage(player) == 1) {
+                    setLanguage(player, 0);
+               } else if (getLanguage(player) == 0) {
+                    setLanguage(player, 1);
+               }
+          } else {
+               setLanguage(player, id);
+          }
+     }
 
-    public static void setLanguage(ProxiedPlayer player, int id) {
-        language.remove(player);
-        language.put(player, id);
-    }
+     public static void setLanguage(ProxiedPlayer player, int id) {
+          language.remove(player);
+          language.put(player, id);
+     }
 
-    public static void save(ProxiedPlayer player) {
-        BasicDBObject query = new BasicDBObject("uuid", player.getUniqueId().toString());
-        MongoCollection<Document> collection = ProxySystem.getInstance().getMongoDB().getDatabase().getCollection("proxy_PlayerData");
-        Document doc = new Document().append("uuid", player.getUniqueId().toString()).append("Language", getLanguage(player));
-        if(collection.find(query).first() == null) {
-             collection.insertOne(doc);
-        } else {
-             collection.findOneAndReplace(query, doc);
-        }
-    }
+     public static void save(ProxiedPlayer player) {
+          BasicDBObject query = new BasicDBObject("uuid", player.getUniqueId().toString());
+          MongoCollection<Document> collection = ProxySystem.getInstance().getMongoDB().getDatabase().getCollection("proxy_PlayerData");
+          Document doc = new Document().append("uuid", player.getUniqueId().toString()).append("Language", getLanguage(player));
+          if (collection.find(query).first() == null) {
+               collection.insertOne(doc);
+          } else {
+               collection.findOneAndReplace(query, doc);
+          }
+     }
 
-    public static int getLanguage(ProxiedPlayer player) {
-        return language.get(player);
-    }
+     public static int getLanguage(ProxiedPlayer player) {
+         if(!language.containsKey(player)) {
+             register(player);
+         }
+         return language.get(player);
+     }
 
-    public static Integer getDataBaseLanguage(ProxiedPlayer player) {
-        BasicDBObject query = new BasicDBObject("uuid", player.getUniqueId().toString());
-        MongoCollection<Document> collection = ProxySystem.getInstance().getMongoDB().getDatabase().getCollection("proxy_PlayerData");
-        if (collection.find(query).first() != null) {
-            return (Integer) collection.find(query).first().get("Language");
-        } else {
-            setLanguage(player, 0);
-            save(player);
-            return getLanguage(player);
-        }
-    }
+     public static Integer getDataBaseLanguage(ProxiedPlayer player) {
+          BasicDBObject query = new BasicDBObject("uuid", player.getUniqueId().toString());
+          MongoCollection<Document> collection = ProxySystem.getInstance().getMongoDB().getDatabase().getCollection("proxy_PlayerData");
+          if (collection.find(query).first() != null) {
+               return (Integer) collection.find(query).first().get("Language");
+          } else {
+               setLanguage(player, 0);
+               save(player);
+               return getLanguage(player);
+          }
+     }
 
-    public static void sendMessage(ProxiedPlayer player, String messageShort) {
-        Configuration config = Language.getConfig(player);
-        String message = config.getString(messageShort);
-        if (message.equals("")) messageShort = "msgNotFound";
-        message = config.getString(messageShort);
-        message = message.replace("%prefix% ", config.getString("prefix"));
-        message = message.replace("%player%", player.getName());
-        message = message.replace("%lang%", Language.getLanguage(getLanguage(player)).getName());
-        player.sendMessage(new TextComponent(ChatColor.translateAlternateColorCodes('&', message)));
-    }
+     public static void sendMessage(ProxiedPlayer player, String messageShort) {
+          Configuration config = Language.getConfig(player);
+          String message = config.getString(messageShort);
+          if (message.equals("")) messageShort = "msgNotFound";
+          message = config.getString(messageShort);
+          message = message.replace("%prefix% ", config.getString("prefix"));
+          message = message.replace("%player%", player.getName());
+          message = message.replace("%lang%", Language.getLanguage(getLanguage(player)).getName());
+          player.sendMessage(new TextComponent(ChatColor.translateAlternateColorCodes('&', message)));
+     }
 
 }

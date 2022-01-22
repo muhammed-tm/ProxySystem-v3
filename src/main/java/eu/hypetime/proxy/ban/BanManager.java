@@ -6,9 +6,11 @@ import com.mongodb.client.MongoCollection;
 import eu.hypetime.proxy.ProxySystem;
 import eu.hypetime.proxy.utils.UUIDFetcher;
 import net.md_5.bungee.api.CommandSender;
+import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 import org.bson.Document;
 
+import java.util.Collection;
 import java.util.UUID;
 
 /*
@@ -40,6 +42,14 @@ public class BanManager {
           Document doc = (new Document()).append("uuid", uuid.toString()).append("banPlayer", gson.toJson(player));
           collection.insertOne(doc);
           banner.sendMessage("§7The player §6" + name + " §7was successfully banned.");
+          if (ProxyServer.getInstance().getPlayer(name) != null) {
+               ProxyServer.getInstance().getPlayer(name).disconnect("§8==========§cBan§8==========\n"
+                    + "§7Du wurdest vom Netzwerk gesperrt.\n"
+                    + "§7Grund§8: §6" + getReason(uuid) + "\n"
+                    + "§7Verbleibende Zeit§8: " + getReamainingTime(uuid) + "\n"
+                    + "§7Gebannt von§8: §6" + getBanner(uuid) + "\n"
+                    + "§8==========§cBan§8==========");
+          }
      }
 
      public void unban(UUID uuid, CommandSender sender) {
@@ -48,15 +58,23 @@ public class BanManager {
                return;
           }
           BasicDBObject query = new BasicDBObject("uuid", uuid.toString());
-          collection.find(query).first().clear();
+          collection.deleteOne(query);
           sender.sendMessage("§7The player §6" + UUIDFetcher.getName(uuid) + " §7was unbanned");
      }
 
-     public boolean isBanned(UUID uuid) {
-          boolean isBanned;
+     public void unban(UUID uuid, Collection<ProxiedPlayer> players) {
           BasicDBObject query = new BasicDBObject("uuid", uuid.toString());
-          isBanned = collection.find(query).first() != null;
-          return isBanned;
+          collection.deleteOne(query);
+          for (ProxiedPlayer player : players) {
+               if (player.hasPermission("system.unban.see")) {
+                    player.sendMessage("§7Der Spieler §6" + UUIDFetcher.getName(uuid) + " §7wurde automatisch vom System entbannt§8!");
+               }
+          }
+     }
+
+     public boolean isBanned(UUID uuid) {
+          BasicDBObject query = new BasicDBObject("uuid", uuid.toString());
+          return collection.find(query).first() != null;
      }
 
      public BanPlayer getBanPlayer(UUID uuid) {
@@ -69,21 +87,21 @@ public class BanManager {
      }
 
      public String getReason(UUID uuid) {
-          if(isBanned(uuid))
+          if (isBanned(uuid))
                return getBanPlayer(uuid).getReason();
           else
                return "";
      }
 
      public long getEnd(UUID uuid) {
-          if(isBanned(uuid))
+          if (isBanned(uuid))
                return getBanPlayer(uuid).getEnd();
           else
                return 0;
      }
 
      public String getBanner(UUID uuid) {
-          if(isBanned(uuid))
+          if (isBanned(uuid))
                return getBanPlayer(uuid).getBanner();
           else
                return "";
