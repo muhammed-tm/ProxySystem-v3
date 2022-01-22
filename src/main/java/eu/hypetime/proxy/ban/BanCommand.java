@@ -14,7 +14,7 @@ import java.util.UUID;
 */
 public class BanCommand extends Command {
      public BanCommand() {
-          super("ban", "system.ban", "verbannen");
+          super("ban", "system.ban");
      }
 
      @Override
@@ -23,17 +23,17 @@ public class BanCommand extends Command {
                try {
                     BanReasons reason = BanReasons.getReason(Integer.parseInt(args[1]));
                     if(reason == BanReasons.NOT_DEFINED) {
-                         sender.sendMessage("Ungültige Ban ID");
+                         sender.sendMessage("Invalid Ban ID");
                          sendBanReasons(sender);
                          return;
                     }
                     ProxySystem.getInstance().getBanManager().ban(UUIDFetcher.getUUID(args[0]), reason, sender);
                } catch(NumberFormatException exception) {
-                    sender.sendMessage("§7Bitte nutze /ban <Spieler> <ID(Grund)>");
+                    sender.sendMessage("§7Please use /ban <player> <ID(reason)>");
                     sendBanReasons(sender);
                }
           } else {
-               sender.sendMessage("§7Bitte nutze /ban <Spieler> <ID(Grund)>");
+               sender.sendMessage("§7Please use /ban <player> <ID(reason)>");
                sendBanReasons(sender);
           }
      }

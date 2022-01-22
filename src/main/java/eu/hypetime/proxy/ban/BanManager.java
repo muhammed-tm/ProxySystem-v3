@@ -27,7 +27,7 @@ public class BanManager {
 
      public void ban(UUID uuid, BanReasons reason, CommandSender banner) {
           if (isBanned(uuid)) {
-               banner.sendMessage("§7Der Spieler ist bereits gebannt");
+               banner.sendMessage("§7The player is already banned");
                return;
           }
           String name = UUIDFetcher.getName(uuid);
@@ -39,17 +39,17 @@ public class BanManager {
           }
           Document doc = (new Document()).append("uuid", uuid.toString()).append("banPlayer", gson.toJson(player));
           collection.insertOne(doc);
-          banner.sendMessage("§7Der Spieler §6" + name + " §7wurde erfolgreich gebannt.");
+          banner.sendMessage("§7The player §6" + name + " §7was successfully banned.");
      }
 
      public void unban(UUID uuid, CommandSender sender) {
           if (!isBanned(uuid)) {
-               sender.sendMessage("Der Spieler ist nicht gebannt.");
+               sender.sendMessage("The player is not banned.");
                return;
           }
           BasicDBObject query = new BasicDBObject("uuid", uuid.toString());
           collection.find(query).first().clear();
-          sender.sendMessage("§7Der Spieler §6" + UUIDFetcher.getName(uuid) + " §7wurde entbannt");
+          sender.sendMessage("§7The player §6" + UUIDFetcher.getName(uuid) + " §7was unbanned");
      }
 
      public boolean isBanned(UUID uuid) {
@@ -121,7 +121,7 @@ public class BanManager {
                days -= 7;
                ++weeks;
           }
-          return "§e" + weeks + " Woche(n) " + days + " Tag(e) " + hours + " Stunde(n) " + minutes + " Minute(n) " + seconds + " Sekunde(n) ";
+          return "§e" + weeks + " week(s) " + days + " day(s) " + hours + " hour(s) " + minutes + " minute(s) " + seconds + " second(s) ";
      }
 
 

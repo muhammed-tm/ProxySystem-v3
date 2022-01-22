@@ -31,7 +31,7 @@ public class MySQL {
                exception.printStackTrace();
           }
 
-          createTables();
+          //createTables();
      }
 
      public void createTables() {
@@ -40,7 +40,7 @@ public class MySQL {
           update("CREATE TABLE IF NOT EXISTS proxy_MutedPlayers (Spielername VARCHAR(100), UUID VARCHAR(100), Ende VARCHAR(100), Grund VARCHAR(100), MUTER VARCHAR(100))");
           update("CREATE TABLE IF NOT EXISTS proxy_Report (Spielername VARCHAR(100), UUID VARCHAR(100), Reports INT(100))");
           update("CREATE TABLE IF NOT EXISTS proxy_Reports (Reporter VARCHAR(100), Reported VARCHAR(100), Reason VARCHAR(100))");
-          update("CREATE TABLE IF NOT EXISTS proxy_PlayerData (UUID VARCHAR(100), DSGVO VARCHAR(100), Language INT(11))");
+          update("CREATE TABLE IF NOT EXISTS proxy_PlayerData (UUID VARCHAR(100), DSGVO VARCHAR(100), Language INT(11) DEFAULT 0)");
           update("CREATE TABLE IF NOT EXISTS proxy_Rewards (UUID VARCHAR(100), NameMC VARCHAR(100))");
           update("CREATE TABLE IF NOT EXISTS proxy_BetaSystem (betakey VARCHAR(100), uuid VARCHAR(100))");
           update("CREATE TABLE IF NOT EXISTS proxy_FriendSystem (uuid VARCHAR(100), name VARCHAR(100), playerFriend VARCHAR(100), requests VARCHAR(100), maxFriends VARCHAR(100))");

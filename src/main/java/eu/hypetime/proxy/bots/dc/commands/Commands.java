@@ -4,10 +4,7 @@ import eu.hypetime.proxy.bots.dc.DiscordBot;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.MessageBuilder;
 import net.dv8tion.jda.api.Permission;
-import net.dv8tion.jda.api.entities.Guild;
-import net.dv8tion.jda.api.entities.Member;
-import net.dv8tion.jda.api.entities.Message;
-import net.dv8tion.jda.api.entities.Role;
+import net.dv8tion.jda.api.entities.*;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.events.message.guild.react.GuildMessageReactionAddEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
@@ -108,7 +105,7 @@ public class Commands extends ListenerAdapter {
                               event.getChannel().sendMessage("Bitte nutze ht!help").queue();
                               return;
                          }
-                         event.getChannel().sendMessage("Seite 1").queue(message1 -> message1.addReaction("??").queue());
+                         event.getChannel().sendMessage("Seite 1").queue(message1 -> message1.addReaction(Emoji.fromUnicode(":arrow_forward:").toString()).queue());
                     }
 
                     if (command.equalsIgnoreCase("clear")) {
@@ -132,9 +129,6 @@ public class Commands extends ListenerAdapter {
                                    "§8§m                                       \n"+
                                    "§6§lHypeTimeEU §7is restarting§8."+
                                    "§8§m                                       \n");
-                    }
-                    if(command.equalsIgnoreCase("claim")) {
-
                     }
                }
 

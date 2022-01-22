@@ -15,7 +15,7 @@ public class top5Command extends ListenerAdapter {
     @Override
     public void onGuildMessageReceived(GuildMessageReceivedEvent event) {
         Message message = event.getMessage();
-        if (message.getContentRaw().startsWith("ht!top5")) {
+        if (message.getContentRaw().startsWith("htb!top5")) {
 
             message.getChannel().sendMessage("§7Liste der Top §65 §7Spieler in GunBattle§8:");
           /*  if (SQLStats.getInstance().listSize() >= 5) {

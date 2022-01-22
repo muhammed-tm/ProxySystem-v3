@@ -11,7 +11,7 @@ public class Suggestion extends ListenerAdapter {
      @Override
      public void onGuildMessageReactionAdd(GuildMessageReactionAddEvent event) {
           if (event.getUser().isBot()) return;
-          if (event.getChannel().getId().equalsIgnoreCase("693213409109475359")) {
+          if (event.getChannel().getId().equalsIgnoreCase("931950724995235870")) {
                try {
                     Message message = event.getChannel().retrieveMessageById(event.getMessageId()).complete();
                     if (message != null) {
