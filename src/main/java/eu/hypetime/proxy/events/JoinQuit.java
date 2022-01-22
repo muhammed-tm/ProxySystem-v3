@@ -25,18 +25,17 @@ public class JoinQuit implements Listener {
           BanManager banManager = ProxySystem.getInstance().getBanManager();
           UUID uuid = player.getUniqueId();
           if (banManager.isBanned(uuid)) {
-               if(banManager.getEnd(uuid) != -1) {
-                    if(banManager.getEnd(uuid) < System.currentTimeMillis()) {
-                         banManager.unban(uuid, ProxyServer.getInstance().getPlayers());
-                    }
-               }
-               if(banManager.isBanned(uuid)) {
+               long current = System.currentTimeMillis();
+               long end = banManager.getEnd(uuid);
+               if (current < end || end == -1L) {
                     player.disconnect("§8==========§cBan§8==========\n"
                          + "§7Du wurdest vom Netzwerk gesperrt.\n"
                          + "§7Grund§8: §6" + banManager.getReason(uuid) + "\n"
                          + "§7Verbleibende Zeit§8: " + banManager.getReamainingTime(uuid) + "\n"
                          + "§7Gebannt von§8: §6" + banManager.getBanner(uuid) + "\n"
                          + "§8==========§cBan§8==========");
+               } else {
+                    banManager.unban(uuid, ProxyServer.getInstance().getPlayers());
                }
           }
           LanguageManager.register(player);

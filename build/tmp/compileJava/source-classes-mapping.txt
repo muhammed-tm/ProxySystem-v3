@@ -70,12 +70,12 @@ eu/hypetime/proxy/mute/MuteReasons.java
  eu.hypetime.proxy.mute.MuteReasons
 eu/hypetime/proxy/bots/dc/ticket/TicketRatingListener.java
  eu.hypetime.proxy.bots.dc.ticket.TicketRatingListener
-eu/hypetime/proxy/lang/Language.java
- eu.hypetime.proxy.lang.Language
-eu/hypetime/proxy/lang/LangCommand.java
- eu.hypetime.proxy.lang.LangCommand
 eu/hypetime/proxy/lang/LangPlayer.java
  eu.hypetime.proxy.lang.LangPlayer
+eu/hypetime/proxy/lang/LangCommand.java
+ eu.hypetime.proxy.lang.LangCommand
+eu/hypetime/proxy/lang/Language.java
+ eu.hypetime.proxy.lang.Language
 eu/hypetime/proxy/lang/LanguageManager.java
  eu.hypetime.proxy.lang.LanguageManager
 eu/hypetime/proxy/ban/BanManager.java

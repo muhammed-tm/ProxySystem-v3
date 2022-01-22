@@ -4,6 +4,8 @@ import com.google.gson.Gson;
 import com.mongodb.BasicDBObject;
 import com.mongodb.client.MongoCollection;
 import eu.hypetime.proxy.ProxySystem;
+import eu.hypetime.proxy.lang.Language;
+import eu.hypetime.proxy.lang.LanguageManager;
 import eu.hypetime.proxy.utils.UUIDFetcher;
 import net.md_5.bungee.api.CommandSender;
 import net.md_5.bungee.api.ProxyServer;
@@ -67,7 +69,12 @@ public class BanManager {
           collection.deleteOne(query);
           for (ProxiedPlayer player : players) {
                if (player.hasPermission("system.unban.see")) {
-                    player.sendMessage("§7Der Spieler §6" + UUIDFetcher.getName(uuid) + " §7wurde automatisch vom System entbannt§8!");
+                    Language language = Language.getLanguage(LanguageManager.getLanguage(player));
+                    if (language == Language.ENGLISH) {
+                         player.sendMessage("§7The Player §6" + UUIDFetcher.getName(uuid) + " §7was automatically unbanned from the system§8!");
+                    } else {
+                         player.sendMessage("§7Der Spieler §6" + UUIDFetcher.getName(uuid) + " §7wurde automatisch vom System entbannt§8!");
+                    }
                }
           }
      }

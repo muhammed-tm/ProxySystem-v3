@@ -23,6 +23,8 @@ public class UnbanCommand extends Command {
                UUID uuid = UUIDFetcher.getUUID(args[0]);
                if(ProxySystem.getInstance().getBanManager().isBanned(uuid)) {
                     ProxySystem.getInstance().getBanManager().unban(uuid, sender);
+               } else {
+                    sender.sendMessage("The Player is not banned");
                }
           } else {
                sender.sendMessage("§7Please use /unban <player>");
