@@ -4,6 +4,7 @@ import net.md_5.bungee.api.connection.ProxiedPlayer;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.concurrent.ThreadLocalRandom;
 
 /*
     Created by Andre
@@ -32,6 +33,10 @@ public class Party {
 
      public ProxiedPlayer getLeader() {
           return leader;
+     }
+
+     public void randomizePartyLeader(ProxiedPlayer player) {
+          setLeader(partyHashMap.get(player).getMembers().get(ThreadLocalRandom.current().nextInt(0, partyHashMap.get(player).getMembers().size())));
      }
 
      public void setLeader(ProxiedPlayer player) {
