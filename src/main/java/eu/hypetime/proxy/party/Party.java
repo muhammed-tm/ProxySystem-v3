@@ -36,11 +36,10 @@ public class Party {
      }
 
      public void randomizePartyLeader(ProxiedPlayer player) {
-          setLeader(partyHashMap.get(player).getMembers().get(ThreadLocalRandom.current().nextInt(0, partyHashMap.get(player).getMembers().size())));
+          setLeader(getPartyByLeader(player).getMembers().get(ThreadLocalRandom.current().nextInt(0, partyHashMap.get(player).getMembers().size())));
      }
 
-     public void setLeader(ProxiedPlayer player) {
-          partyHashMap.get(this.leader).leader = player;
+     public void setLeader(ProxiedPlayer player) { getPartyByLeader(this.leader).leader = player;
      }
 
      public ArrayList<ProxiedPlayer> getMembers() {

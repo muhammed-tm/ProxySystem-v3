@@ -11,6 +11,7 @@ import eu.hypetime.proxy.events.JoinQuit;
 import eu.hypetime.proxy.lang.LangCommand;
 import eu.hypetime.proxy.lang.Language;
 import eu.hypetime.proxy.lang.LanguageManager;
+import eu.hypetime.proxy.party.PartyManager;
 import eu.hypetime.proxy.utils.FileManager;
 import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
@@ -22,6 +23,8 @@ import net.md_5.bungee.config.YamlConfiguration;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /*
     Created by Andre
@@ -39,6 +42,7 @@ public class ProxySystem extends Plugin {
      private Configuration germanCfg;
      private MongoDB mongoDB;
      private BanManager banManager;
+     private ExecutorService executors;
 
      public static ProxySystem getInstance() {
           return instance;
@@ -52,6 +56,7 @@ public class ProxySystem extends Plugin {
           mySQL = mySQLConfig.mySQL;
           mongoDB = new MongoDB();
           banManager = new BanManager();
+          executors = Executors.newCachedThreadPool();
 
           registerMessage();
           DiscordBot.start();
@@ -116,6 +121,8 @@ public class ProxySystem extends Plugin {
                e.printStackTrace();
           }
 
+          PartyManager.startCountdown();
+
 
      }
 
@@ -149,6 +156,10 @@ public class ProxySystem extends Plugin {
 
      public Configuration getGermanCfg() {
           return germanCfg;
+     }
+
+     public ExecutorService getExecutors() {
+          return executors;
      }
 
      public String getPrefix() {
