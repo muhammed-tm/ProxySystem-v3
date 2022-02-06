@@ -15,7 +15,8 @@ public class MongoDB {
      private final MongoDatabase database;
 
      public MongoDB() {
-          client = new MongoClient(new MongoClientURI("mongodb://193.135.10.148:27017/?readPreference=primary&appname=mongosh+1.1.9&directConnection=true&ssl=false"));
+         // client = new MongoClient(new MongoClientURI("mongodb://193.135.10.148:27017/?readPreference=primary&appname=mongosh+1.1.9&directConnection=true&ssl=false"));
+          client = new MongoClient((new MongoClientURI("mongodb://127.0.0.1:27017/?directConnection=true&useSSL=false")));
           database = client.getDatabase("minecraft");
      }
 

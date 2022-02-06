@@ -51,7 +51,7 @@ public class DiscordBot extends ListenerAdapter {
             registerListener(new top5Command());
             registerListener(new TicketRatingListener());
 
-            jda.getPresence().setActivity(Activity.playing("HypeTime v3"));
+            jda.getPresence().setActivity(Activity.playing("HypeTime v3 work in Progress"));
             jda.getPresence().setStatus(OnlineStatus.DO_NOT_DISTURB);
 
             Logger.info("Erfolgreich gestartet");
