@@ -3,6 +3,7 @@ package eu.hypetime.proxy.ban;
 import eu.hypetime.proxy.ProxySystem;
 import eu.hypetime.proxy.utils.UUIDFetcher;
 import net.md_5.bungee.api.CommandSender;
+import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.plugin.Command;
 
 import java.util.UUID;
@@ -14,7 +15,7 @@ import java.util.UUID;
 */
 public class BanCommand extends Command {
      public BanCommand() {
-          super("ban", "system.ban");
+          super("ban", "proxysystem.ban");
      }
 
      @Override
@@ -26,6 +27,12 @@ public class BanCommand extends Command {
                          sender.sendMessage("Invalid Ban ID");
                          sendBanReasons(sender);
                          return;
+                    }
+                    if(sender instanceof ProxiedPlayer player) {
+                         if(!player.hasPermission(reason.getPermission())) {
+                              player.sendMessage("§7No Permission for this Ban Reason.");
+                              return;
+                         }
                     }
                     ProxySystem.getInstance().getBanManager().ban(UUIDFetcher.getUUID(args[0]), reason, sender);
                } catch(NumberFormatException exception) {
