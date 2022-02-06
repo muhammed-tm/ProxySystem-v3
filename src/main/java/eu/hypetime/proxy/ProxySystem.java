@@ -9,8 +9,11 @@ import eu.hypetime.proxy.database.MySQL;
 import eu.hypetime.proxy.database.MySQLConfig;
 import eu.hypetime.proxy.events.JoinQuit;
 import eu.hypetime.proxy.lang.LangCommand;
+import eu.hypetime.proxy.lang.Language;
+import eu.hypetime.proxy.lang.LanguageManager;
 import eu.hypetime.proxy.utils.FileManager;
 import net.md_5.bungee.api.ProxyServer;
+import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.plugin.Plugin;
 import net.md_5.bungee.api.plugin.PluginManager;
 import net.md_5.bungee.config.Configuration;
@@ -83,10 +86,6 @@ public class ProxySystem extends Plugin {
           germanCfg = fileManager.getConfiguration("german.yml", getDataFolder().getAbsolutePath() + "/messages");
 
           //DEFAULT
-          //Prefix
-
-          englishCfg.set("prefix", "&6Proxy &8| &7");
-          germanCfg.set("prefix", "&6Bungee &8| &7");
 
           //Not Found
           englishCfg.set("msgNotFound", "%prefix% Message was not found");
@@ -150,6 +149,10 @@ public class ProxySystem extends Plugin {
 
      public Configuration getGermanCfg() {
           return germanCfg;
+     }
+
+     public String getPrefix() {
+          return "§6HypeTime §8| §7";
      }
 
 }

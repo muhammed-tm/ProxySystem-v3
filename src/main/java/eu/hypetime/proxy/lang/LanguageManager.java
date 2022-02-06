@@ -76,14 +76,18 @@ public class LanguageManager {
      }
 
      public static void sendMessage(ProxiedPlayer player, String messageShort) {
+          player.sendMessage(new TextComponent(ChatColor.translateAlternateColorCodes('&', getMessage(player, messageShort))));
+     }
+
+     public static String getMessage(ProxiedPlayer player, String messageShort) {
           Configuration config = Language.getConfig(player);
           String message = config.getString(messageShort);
           if (message.equals("")) messageShort = "msgNotFound";
           message = config.getString(messageShort);
-          message = message.replace("%prefix% ", config.getString("prefix"));
+          message = message.replace("%prefix% ", ProxySystem.getInstance().getPrefix());
           message = message.replace("%player%", player.getName());
           message = message.replace("%lang%", Language.getLanguage(getLanguage(player)).getName());
-          player.sendMessage(new TextComponent(ChatColor.translateAlternateColorCodes('&', message)));
+          return message;
      }
 
 }

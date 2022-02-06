@@ -24,23 +24,23 @@ public class BanCommand extends Command {
                try {
                     BanReasons reason = BanReasons.getReason(Integer.parseInt(args[1]));
                     if(reason == BanReasons.NOT_DEFINED) {
-                         sender.sendMessage("Invalid Ban ID");
+                         sender.sendMessage(ProxySystem.getInstance().getPrefix() + "Invalid Ban ID");
                          sendBanReasons(sender);
                          return;
                     }
                     if(sender instanceof ProxiedPlayer player) {
                          if(!player.hasPermission(reason.getPermission())) {
-                              player.sendMessage("§7No Permission for this Ban Reason.");
+                              player.sendMessage(ProxySystem.getInstance().getPrefix() + "§7No Permission for this Ban Reason.");
                               return;
                          }
                     }
                     ProxySystem.getInstance().getBanManager().ban(UUIDFetcher.getUUID(args[0]), reason, sender);
                } catch(NumberFormatException exception) {
-                    sender.sendMessage("§7Please use /ban <player> <ID(reason)>");
+                    sender.sendMessage(ProxySystem.getInstance().getPrefix() + "§7Please use /ban <player> <ID(reason)>");
                     sendBanReasons(sender);
                }
           } else {
-               sender.sendMessage("§7Please use /ban <player> <ID(reason)>");
+               sender.sendMessage(ProxySystem.getInstance().getPrefix() + "§7Please use /ban <player> <ID(reason)>");
                sendBanReasons(sender);
           }
      }

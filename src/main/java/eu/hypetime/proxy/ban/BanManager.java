@@ -56,12 +56,12 @@ public class BanManager {
 
      public void unban(UUID uuid, CommandSender sender) {
           if (!isBanned(uuid)) {
-               sender.sendMessage("The player is not banned.");
+               sender.sendMessage(ProxySystem.getInstance().getPrefix() + "§7The player is not banned.");
                return;
           }
           BasicDBObject query = new BasicDBObject("uuid", uuid.toString());
           collection.deleteOne(query);
-          sender.sendMessage("§7The player §6" + UUIDFetcher.getName(uuid) + " §7was unbanned");
+          sender.sendMessage(ProxySystem.getInstance().getPrefix() + "§7The player §6" + UUIDFetcher.getName(uuid) + " §7was unbanned");
      }
 
      public void unban(UUID uuid, Collection<ProxiedPlayer> players) {
@@ -71,9 +71,9 @@ public class BanManager {
                if (player.hasPermission("system.unban.see")) {
                     Language language = Language.getLanguage(LanguageManager.getLanguage(player));
                     if (language == Language.ENGLISH) {
-                         player.sendMessage("§7The Player §6" + UUIDFetcher.getName(uuid) + " §7was automatically unbanned from the system§8!");
+                         player.sendMessage(ProxySystem.getInstance().getPrefix() + "§7The Player §6" + UUIDFetcher.getName(uuid) + " §7was automatically unbanned from the system§8!");
                     } else {
-                         player.sendMessage("§7Der Spieler §6" + UUIDFetcher.getName(uuid) + " §7wurde automatisch vom System entbannt§8!");
+                         player.sendMessage(ProxySystem.getInstance().getPrefix() + "§7Der Spieler §6" + UUIDFetcher.getName(uuid) + " §7wurde automatisch vom System entbannt§8!");
                     }
                }
           }
