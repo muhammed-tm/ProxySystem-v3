@@ -1,6 +1,7 @@
 package eu.hypetime.proxy.ban;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.mongodb.BasicDBObject;
 import com.mongodb.client.MongoCollection;
 import eu.hypetime.proxy.ProxySystem;
@@ -22,11 +23,11 @@ import java.util.UUID;
 */
 public class BanManager {
 
-     public static Gson gson = (new Gson()).newBuilder().create();
+     public static Gson gson = new GsonBuilder().create();
      private static MongoCollection<Document> collection;
 
      public BanManager() {
-          collection = ProxySystem.getInstance().getMongoDB().getDatabase().getCollection("proxy_ban");
+          collection = ProxySystem.getInstance().getMongoDB().getDatabase().getCollection("proxy_Ban");
      }
 
      public void ban(UUID uuid, BanReasons reason, CommandSender banner) {
@@ -42,16 +43,21 @@ public class BanManager {
                player = new BanPlayer(name, reason, "System");
           }
           Document doc = (new Document()).append("uuid", uuid.toString()).append("banPlayer", gson.toJson(player));
-          collection.insertOne(doc);
-          banner.sendMessage("§7The player §6" + name + " §7was successfully banned.");
           if (ProxyServer.getInstance().getPlayer(name) != null) {
+               doc.append("ip", ProxyServer.getInstance().getPlayer(name).getSocketAddress().toString().split(":")[0]);
+               collection.insertOne(doc);
                ProxyServer.getInstance().getPlayer(name).disconnect("§8==========§cBan§8==========\n"
                     + "§7Du wurdest vom Netzwerk gesperrt.\n"
                     + "§7Grund§8: §6" + getReason(uuid) + "\n"
                     + "§7Verbleibende Zeit§8: " + getReamainingTime(uuid) + "\n"
                     + "§7Gebannt von§8: §6" + getBanner(uuid) + "\n"
                     + "§8==========§cBan§8==========");
+
+          } else {
+               doc.append("ip", " ");
+               collection.insertOne(doc);
           }
+          banner.sendMessage("§7The player §6" + name + " §7was successfully banned.");
      }
 
      public void unban(UUID uuid, CommandSender sender) {
@@ -81,6 +87,23 @@ public class BanManager {
 
      public boolean isBanned(UUID uuid) {
           BasicDBObject query = new BasicDBObject("uuid", uuid.toString());
+          return collection.find(query).first() != null;
+     }
+
+     public Document getBan(UUID uuid) {
+          BasicDBObject query = new BasicDBObject("uuid", uuid.toString());
+          return collection.find(query).first();
+     }
+
+     public void updateIP(UUID uuid, String ip) {
+          BasicDBObject query = new BasicDBObject("uuid", uuid.toString());
+          Document update = getBan(uuid);
+          update.append("ip", ip);
+          collection.replaceOne(query, update);
+     }
+
+     public boolean isBanned(String ip) {
+          BasicDBObject query = new BasicDBObject("ip", ip);
           return collection.find(query).first() != null;
      }
 

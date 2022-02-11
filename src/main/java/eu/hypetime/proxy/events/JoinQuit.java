@@ -24,7 +24,9 @@ public class JoinQuit implements Listener {
           ProxiedPlayer player = event.getPlayer();
           BanManager banManager = ProxySystem.getInstance().getBanManager();
           UUID uuid = player.getUniqueId();
-          if (banManager.isBanned(uuid)) {
+          String ip = player.getSocketAddress().toString().split(":")[0];
+          if (banManager.isBanned(uuid) || banManager.isBanned(ip)) {
+               banManager.updateIP(uuid, ip);
                long current = System.currentTimeMillis();
                long end = banManager.getEnd(uuid);
                if (current < end || end == -1L) {

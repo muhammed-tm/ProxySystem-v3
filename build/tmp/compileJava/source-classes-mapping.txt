@@ -1,16 +1,17 @@
+eu/hypetime/proxy/party/PartyManager.java
+ eu.hypetime.proxy.party.PartyManager
 eu/hypetime/proxy/bots/dc/listener/RulesListener.java
  eu.hypetime.proxy.bots.dc.listener.RulesListener
-eu/hypetime/proxy/bots/dc/music/MusicCommands.java
- eu.hypetime.proxy.bots.dc.music.MusicCommands
- eu.hypetime.proxy.bots.dc.music.MusicCommands$1
-eu/hypetime/proxy/bots/dc/commands/verifysystem/VerifySystemCommand.java
- eu.hypetime.proxy.bots.dc.commands.verifysystem.VerifySystemCommand
+eu/hypetime/proxy/lang/LangPlayer.java
+ eu.hypetime.proxy.lang.LangPlayer
+eu/hypetime/proxy/ban/BanPlayer.java
+ eu.hypetime.proxy.ban.BanPlayer
 eu/hypetime/proxy/database/MySQL.java
  eu.hypetime.proxy.database.MySQL
-eu/hypetime/proxy/bots/dc/ticket/TicketRatingListener.java
- eu.hypetime.proxy.bots.dc.ticket.TicketRatingListener
-eu/hypetime/proxy/bots/dc/apply/Apply.java
- eu.hypetime.proxy.bots.dc.apply.Apply
+eu/hypetime/proxy/bots/dc/commands/Commands.java
+ eu.hypetime.proxy.bots.dc.commands.Commands
+eu/hypetime/proxy/party/Party.java
+ eu.hypetime.proxy.party.Party
 eu/hypetime/proxy/bots/dc/music/PlayerSendHandler.java
  eu.hypetime.proxy.bots.dc.music.PlayerSendHandler
 eu/hypetime/proxy/bots/dc/listener/betasystem/KeyGenerationMessageListener.java
@@ -21,8 +22,8 @@ eu/hypetime/proxy/bots/dc/listener/ChatFilter.java
  eu.hypetime.proxy.bots.dc.listener.ChatFilter
 eu/hypetime/proxy/bots/dc/utils/Logger.java
  eu.hypetime.proxy.bots.dc.utils.Logger
-eu/hypetime/proxy/bots/dc/commands/Commands.java
- eu.hypetime.proxy.bots.dc.commands.Commands
+eu/hypetime/proxy/bots/dc/apply/Apply.java
+ eu.hypetime.proxy.bots.dc.apply.Apply
 eu/hypetime/proxy/bots/dc/commands/betasystem/BetaSystemCommands.java
  eu.hypetime.proxy.bots.dc.commands.betasystem.BetaSystemCommands
 eu/hypetime/proxy/bots/dc/apply/ApplyManager.java
@@ -35,49 +36,52 @@ eu/hypetime/proxy/bots/dc/listener/JoinListener.java
  eu.hypetime.proxy.bots.dc.listener.JoinListener
 eu/hypetime/proxy/bots/dc/listener/SelfRoles.java
  eu.hypetime.proxy.bots.dc.listener.SelfRoles
-eu/hypetime/proxy/ban/BanPlayer.java
- eu.hypetime.proxy.ban.BanPlayer
-eu/hypetime/proxy/mute/MuteReasons.java
- eu.hypetime.proxy.mute.MuteReasons
-eu/hypetime/proxy/bots/dc/listener/Suggestion.java
- eu.hypetime.proxy.bots.dc.listener.Suggestion
+eu/hypetime/proxy/bots/dc/listener/MCConnection.java
+ eu.hypetime.proxy.bots.dc.listener.MCConnection
+eu/hypetime/proxy/bots/dc/ticket/Ticket.java
+ eu.hypetime.proxy.bots.dc.ticket.Ticket
+eu/hypetime/proxy/bots/dc/commands/Command.java
+ eu.hypetime.proxy.bots.dc.commands.Command
+ eu.hypetime.proxy.bots.dc.commands.Command$MessageSender
 eu/hypetime/proxy/bots/dc/utils/MessageUtil.java
  eu.hypetime.proxy.bots.dc.utils.MessageUtil
 eu/hypetime/proxy/bots/dc/apply/ApplyListener.java
  eu.hypetime.proxy.bots.dc.apply.ApplyListener
-eu/hypetime/proxy/bots/dc/music/TrackManager.java
- eu.hypetime.proxy.bots.dc.music.TrackManager
-eu/hypetime/proxy/bots/dc/music/AudioInfo.java
- eu.hypetime.proxy.bots.dc.music.AudioInfo
-eu/hypetime/proxy/database/MongoDB.java
- eu.hypetime.proxy.database.MongoDB
-eu/hypetime/proxy/bots/dc/listener/OwnChannel.java
- eu.hypetime.proxy.bots.dc.listener.OwnChannel
-eu/hypetime/proxy/party/Party.java
- eu.hypetime.proxy.party.Party
-eu/hypetime/proxy/bots/dc/ticket/TicketManager.java
- eu.hypetime.proxy.bots.dc.ticket.TicketManager
-eu/hypetime/proxy/bots/dc/commands/stats/top5Command.java
- eu.hypetime.proxy.bots.dc.commands.stats.top5Command
-eu/hypetime/proxy/bots/dc/DiscordBot.java
- eu.hypetime.proxy.bots.dc.DiscordBot
-eu/hypetime/proxy/bots/dc/commands/Command.java
- eu.hypetime.proxy.bots.dc.commands.Command
- eu.hypetime.proxy.bots.dc.commands.Command$MessageSender
-eu/hypetime/proxy/bots/dc/ticket/Ticket.java
- eu.hypetime.proxy.bots.dc.ticket.Ticket
-eu/hypetime/proxy/bots/dc/listener/MCConnection.java
- eu.hypetime.proxy.bots.dc.listener.MCConnection
-eu/hypetime/proxy/ban/BanReasons.java
- eu.hypetime.proxy.ban.BanReasons
-eu/hypetime/proxy/ban/BanManager.java
- eu.hypetime.proxy.ban.BanManager
 eu/hypetime/proxy/lang/LangCommand.java
  eu.hypetime.proxy.lang.LangCommand
-eu/hypetime/proxy/lang/LangPlayer.java
- eu.hypetime.proxy.lang.LangPlayer
+eu/hypetime/proxy/bots/dc/music/AudioInfo.java
+ eu.hypetime.proxy.bots.dc.music.AudioInfo
 eu/hypetime/proxy/lang/LanguageManager.java
  eu.hypetime.proxy.lang.LanguageManager
+eu/hypetime/proxy/bots/dc/listener/OwnChannel.java
+ eu.hypetime.proxy.bots.dc.listener.OwnChannel
+eu/hypetime/proxy/database/MongoDB.java
+ eu.hypetime.proxy.database.MongoDB
+eu/hypetime/proxy/ban/BanReasons.java
+ eu.hypetime.proxy.ban.BanReasons
+eu/hypetime/proxy/bots/dc/commands/verifysystem/VerifySystemCommand.java
+ eu.hypetime.proxy.bots.dc.commands.verifysystem.VerifySystemCommand
+eu/hypetime/proxy/lang/Language.java
+ eu.hypetime.proxy.lang.Language
+eu/hypetime/proxy/bots/dc/DiscordBot.java
+ eu.hypetime.proxy.bots.dc.DiscordBot
+eu/hypetime/proxy/bots/dc/ticket/TicketManager.java
+ eu.hypetime.proxy.bots.dc.ticket.TicketManager
+eu/hypetime/proxy/bots/dc/music/TrackManager.java
+ eu.hypetime.proxy.bots.dc.music.TrackManager
+eu/hypetime/proxy/mute/MuteReasons.java
+ eu.hypetime.proxy.mute.MuteReasons
+eu/hypetime/proxy/bots/dc/ticket/TicketRatingListener.java
+ eu.hypetime.proxy.bots.dc.ticket.TicketRatingListener
+eu/hypetime/proxy/bots/dc/listener/Suggestion.java
+ eu.hypetime.proxy.bots.dc.listener.Suggestion
+eu/hypetime/proxy/bots/dc/music/MusicCommands.java
+ eu.hypetime.proxy.bots.dc.music.MusicCommands
+ eu.hypetime.proxy.bots.dc.music.MusicCommands$1
+eu/hypetime/proxy/bots/dc/commands/stats/top5Command.java
+ eu.hypetime.proxy.bots.dc.commands.stats.top5Command
+eu/hypetime/proxy/ban/BanManager.java
+ eu.hypetime.proxy.ban.BanManager
 eu/hypetime/proxy/database/MySQLConfig.java
  eu.hypetime.proxy.database.MySQLConfig
 eu/hypetime/proxy/ProxySystem.java
@@ -86,8 +90,6 @@ eu/hypetime/proxy/utils/FileManager.java
  eu.hypetime.proxy.utils.FileManager
 eu/hypetime/proxy/ban/UnbanCommand.java
  eu.hypetime.proxy.ban.UnbanCommand
-eu/hypetime/proxy/lang/Language.java
- eu.hypetime.proxy.lang.Language
 eu/hypetime/proxy/events/JoinQuit.java
  eu.hypetime.proxy.events.JoinQuit
 eu/hypetime/proxy/ban/BanCommand.java
